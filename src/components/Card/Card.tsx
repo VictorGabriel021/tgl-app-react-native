@@ -17,13 +17,14 @@ import Colors from "../../constants";
 type Props = {
   children: React.ReactNode;
   buttonText: string;
+  title: string;
 };
 
-const AuthCard = ({ children, buttonText }: Props) => {
+const AuthCard = ({ children, buttonText, title }: Props) => {
   return (
     <AuthContainer>
       <AuthContainerText>
-        <AuthText>Authentication</AuthText>
+        <AuthText>{title}</AuthText>
       </AuthContainerText>
       <CardContainer>
         <CardContent>{children}</CardContent>

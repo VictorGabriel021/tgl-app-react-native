@@ -3,15 +3,15 @@ import { Text } from "react-native";
 import AuthPresentation from "../../../components/Auth/AuthPresentation";
 import AuthCard from "../../../components/Card/Card";
 
-const Login = () => {
+const Register = () => {
   return (
     <>
       <AuthPresentation />
-      <AuthCard title="Authentication" buttonText="Log In">
-        <Text>Login</Text>
+      <AuthCard title="Registration" buttonText="Register">
+        <Text>Register</Text>
       </AuthCard>
     </>
   );
 };
 
-export default Login;
+export default Register;
