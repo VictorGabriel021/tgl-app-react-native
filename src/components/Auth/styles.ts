@@ -7,7 +7,7 @@ export const AuthContainer = styled.View`
   justify-content: center;
   padding: 20px;
   overflow: hidden;
-  height: 40%;
+  height: 100%;
 `;
 
 export const AuthTitle = styled.Text`

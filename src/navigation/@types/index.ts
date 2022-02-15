@@ -3,6 +3,7 @@ export type RootStackParamList = {
 };
 
 export type RootBottomTabParamList = {
+  AuthPresentation: undefined;
   Login: undefined;
   Recover: undefined;
   Register: undefined;

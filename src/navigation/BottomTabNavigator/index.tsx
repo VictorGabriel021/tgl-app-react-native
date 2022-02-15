@@ -8,6 +8,7 @@ import { RootBottomTabParamList } from "../@types";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
+import AuthPresentation from "../../components/Auth/AuthPresentation";
 import LoginScreen from "../../screens/Auth/Login";
 import RecoverScreen from "../../screens/Auth/Recover";
 import RegisterScreen from "../../screens/Auth/Register";
@@ -38,6 +39,16 @@ const BottomTabNavigator = () => {
         tabBarStyle: { height: 55 },
       }}
     >
+      <BottomTab.Screen
+        name="AuthPresentation"
+        component={AuthPresentation}
+        options={{
+          title: "Home",
+          tabBarIcon: () => {
+            return <Entypo name="home" size={24} color="white" />;
+          },
+        }}
+      />
       <BottomTab.Screen
         name="Login"
         component={LoginScreen}

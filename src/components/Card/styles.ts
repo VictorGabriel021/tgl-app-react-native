@@ -3,8 +3,8 @@ import styled from "styled-components/native";
 import Colors from "../../constants";
 
 export const AuthContainer = styled.View`
-  height: 60%;
-  padding: 10px 0;
+  height: 100%;
+  padding: 20px 0;
 `;
 
 export const AuthContainerText = styled.View`
@@ -14,7 +14,7 @@ export const AuthContainerText = styled.View`
 export const AuthText = styled.Text`
   font-family: "helvetica-neue-bold-italic";
   color: #707070;
-  font-size: 28;
+  font-size: 28px;
 `;
 
 export const CardContainer = styled.View`
@@ -26,13 +26,13 @@ export const CardContainer = styled.View`
 `;
 
 export const CardContent = styled.View`
-  height: 80%;
+  height: 70%;
 `;
 
 export const CardTextActionContainer = styled.View`
-  height: 20%;
+  height: 30%;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
 `;
 
 export const CardTextAction = styled(AuthText)`

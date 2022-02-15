@@ -1,16 +1,25 @@
 import { Text } from "react-native";
 
-import AuthPresentation from "../../../components/Auth/AuthPresentation";
 import AuthCard from "../../../components/Card/Card";
+
+import { Input, InputContainer } from "../components/Input/styles";
 
 const Register = () => {
   return (
-    <>
-      <AuthPresentation />
-      <AuthCard title="Registration" buttonText="Register">
-        <Text>Register</Text>
-      </AuthCard>
-    </>
+    <AuthCard title="Registration" buttonText="Register" onSumbit={() => {}}>
+      <InputContainer>
+        <Text>Name</Text>
+        <Input />
+      </InputContainer>
+      <InputContainer>
+        <Text>Email</Text>
+        <Input />
+      </InputContainer>
+      <InputContainer>
+        <Text>Password</Text>
+        <Input />
+      </InputContainer>
+    </AuthCard>
   );
 };
 

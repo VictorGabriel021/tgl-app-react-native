@@ -1,4 +1,8 @@
-import { TouchableOpacity } from "react-native";
+import {
+  TouchableOpacity,
+  ScrollView,
+  KeyboardAvoidingView,
+} from "react-native";
 
 import {
   AuthContainer,
@@ -18,26 +22,35 @@ type Props = {
   children: React.ReactNode;
   buttonText: string;
   title: string;
+  onSumbit: () => void;
 };
 
-const AuthCard = ({ children, buttonText, title }: Props) => {
+const AuthCard = ({ children, buttonText, title, onSumbit }: Props) => {
   return (
-    <AuthContainer>
-      <AuthContainerText>
-        <AuthText>{title}</AuthText>
-      </AuthContainerText>
-      <CardContainer>
-        <CardContent>{children}</CardContent>
-        <CardTextActionContainer>
-          <TouchableOpacity activeOpacity={0.4}>
-            <CardTextAction>
-              {buttonText}
-              <AntDesign name="arrowright" size={24} color={Colors.secondary} />
-            </CardTextAction>
-          </TouchableOpacity>
-        </CardTextActionContainer>
-      </CardContainer>
-    </AuthContainer>
+    <KeyboardAvoidingView behavior="height" keyboardVerticalOffset={120}>
+      <ScrollView>
+        <AuthContainer>
+          <AuthContainerText>
+            <AuthText>{title}</AuthText>
+          </AuthContainerText>
+          <CardContainer>
+            <CardContent>{children}</CardContent>
+            <CardTextActionContainer>
+              <TouchableOpacity activeOpacity={0.4} onPress={onSumbit}>
+                <CardTextAction>
+                  {buttonText}
+                  <AntDesign
+                    name="arrowright"
+                    size={24}
+                    color={Colors.secondary}
+                  />
+                </CardTextAction>
+              </TouchableOpacity>
+            </CardTextActionContainer>
+          </CardContainer>
+        </AuthContainer>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 

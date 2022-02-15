@@ -19,11 +19,15 @@ const AuthPresentation = () => {
     CustomButton = TouchableNativeFeedback;
   }
 
+  const navigateToLoginHandler = () => {
+    console.log("navigate ti kigub");
+  };
+
   return (
     <AuthContainer>
       <AuthTitle>The Greatest App</AuthTitle>
       <ButtonContainer>
-        <CustomButton activeOpacity={0.7}>
+        <CustomButton activeOpacity={0.7} onPress={navigateToLoginHandler}>
           <Button>
             <ButtonText>for</ButtonText>
           </Button>
