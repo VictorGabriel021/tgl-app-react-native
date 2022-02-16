@@ -1,8 +1,8 @@
 import { Text } from "react-native";
 
-import { Input, InputContainer, ErrorMessage } from "./styles";
+import { InputContent, Input, ErrorMessage } from "./styles";
 
-import { Props } from "../../../../@types/InputControllerTypes";
+import { Props } from "../../@types/InputControllerTypes";
 
 import { useController } from "react-hook-form";
 
@@ -14,7 +14,6 @@ const InputController = ({
   control,
   rules,
   secureTextEntry,
-  keyboardType,
 }: Props) => {
   const { field } = useController({
     control,
@@ -23,16 +22,15 @@ const InputController = ({
   });
 
   return (
-    <InputContainer>
+    <InputContent>
       <Text>{label}*</Text>
       {!!error && <ErrorMessage>{errorMessage}</ErrorMessage>}
       <Input
         onChangeText={field.onChange}
         value={field.value}
         secureTextEntry={secureTextEntry}
-        keyboardType={keyboardType}
       />
-    </InputContainer>
+    </InputContent>
   );
 };
 

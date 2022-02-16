@@ -1,9 +1,7 @@
 import styled from "styled-components/native";
 
-export const InputContainer = styled.View`
-  margin-bottom: 15px;
-  border-bottom-width: 1px;
-  border-bottom-color: #ebebeb;
+export const InputContent = styled.View`
+  flex-direction: column;
 `;
 
 export const Input = styled.TextInput`

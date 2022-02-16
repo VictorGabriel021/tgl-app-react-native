@@ -13,14 +13,23 @@ import {
   ButtonText,
 } from "./styles";
 
+import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+
+import { RootStackParamList } from "../../navigation/@types";
+
+type rootScreenProp = StackNavigationProp<RootStackParamList, "Login">;
+
 const AuthPresentation = () => {
+  const navigation = useNavigation<rootScreenProp>();
+
   let CustomButton: any = TouchableOpacity;
   if (Platform.OS === "android" && Platform.Version >= 21) {
     CustomButton = TouchableNativeFeedback;
   }
 
   const navigateToLoginHandler = () => {
-    console.log("navigate ti kigub");
+    navigation.navigate("Login");
   };
 
   return (

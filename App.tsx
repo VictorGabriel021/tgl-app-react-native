@@ -1,9 +1,14 @@
+import 'react-native-gesture-handler';
+
 import { useState } from "react";
 
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 
 import Navigation from "./src/navigation";
+
+import { Provider } from "react-redux";
+import { store } from "./src/store/store";
 
 const fetchFonts = () => {
   return Font.loadAsync({
@@ -28,5 +33,9 @@ export default function App() {
       />
     );
   }
-  return <Navigation />;
+  return (
+    <Provider store={store}>
+      <Navigation />
+    </Provider>
+  );
 }

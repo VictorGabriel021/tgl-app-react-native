@@ -9,19 +9,38 @@ interface User {
   is_admin: number;
   name: string;
   token: string;
-  token_created_at: Date;
-  created_at: Date;
-  updated_at: Date;
+  token_created_at: string;
+  created_at: string;
+  updated_at: string;
   picture?: any;
 }
 
 interface Token {
   type: string;
   token: string;
-  expires_at: Date;
+  expires_at: string;
 }
 
 export interface ILoginResponse {
   user: User;
   token: Token;
 }
+
+export const defaultValuesILoginResponse = {
+  user: {
+    id: 0,
+    email: "",
+    is_admin: 0,
+    name: "",
+    token: "",
+    token_created_at: "",
+    created_at: "",
+    updated_at: "",
+    picture: "",
+  },
+  token: {
+    type: "",
+    token: "",
+    expires_at: "",
+  },
+};

@@ -1,14 +1,17 @@
 import styled from "styled-components/native";
 
-import Colors from "../../constants";
+import { Colors } from "../../constants";
 
 export const AuthContainer = styled.View`
   height: 100%;
-  padding: 20px 0;
+  padding: 10px 0;
 `;
 
 export const AuthContainerText = styled.View`
+  flex-direction: row;
+  justify-content: center;
   align-items: center;
+  margin: 10px 0;
 `;
 
 export const AuthText = styled.Text`

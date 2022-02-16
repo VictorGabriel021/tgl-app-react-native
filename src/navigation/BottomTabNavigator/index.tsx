@@ -2,7 +2,7 @@ import { Entypo } from "@expo/vector-icons";
 
 import { Platform } from "react-native";
 
-import Colors from "../../constants";
+import { Colors } from "../../constants";
 
 import { RootBottomTabParamList } from "../@types";
 
@@ -10,7 +10,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
 import AuthPresentation from "../../components/Auth/AuthPresentation";
 import LoginScreen from "../../screens/Auth/Login";
-import RecoverScreen from "../../screens/Auth/Recover";
+import ResetScreen from "../../screens/Auth/Reset";
 import RegisterScreen from "../../screens/Auth/Register";
 
 const BottomTab = createBottomTabNavigator<RootBottomTabParamList>();
@@ -59,8 +59,8 @@ const BottomTabNavigator = () => {
         }}
       />
       <BottomTab.Screen
-        name="Recover"
-        component={RecoverScreen}
+        name="Reset"
+        component={ResetScreen}
         options={{
           tabBarIcon: () => {
             return <Entypo name="forward" size={24} color="white" />;

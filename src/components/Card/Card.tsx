@@ -16,16 +16,25 @@ import {
 
 import { AntDesign } from "@expo/vector-icons";
 
-import Colors from "../../constants";
+import { Colors } from "../../constants";
 
 type Props = {
   children: React.ReactNode;
   buttonText: string;
   title: string;
+  titleRedirect: string;
+  onNavigation: () => void;
   onSumbit: () => void;
 };
 
-const AuthCard = ({ children, buttonText, title, onSumbit }: Props) => {
+const AuthCard = ({
+  children,
+  buttonText,
+  title,
+  titleRedirect,
+  onNavigation,
+  onSumbit,
+}: Props) => {
   return (
     <KeyboardAvoidingView behavior="height" keyboardVerticalOffset={120}>
       <ScrollView>
@@ -48,6 +57,17 @@ const AuthCard = ({ children, buttonText, title, onSumbit }: Props) => {
               </TouchableOpacity>
             </CardTextActionContainer>
           </CardContainer>
+          <TouchableOpacity activeOpacity={0.4} onPress={onNavigation}>
+            <AuthContainerText>
+              {titleRedirect === "Back" && (
+                <AntDesign name="arrowleft" size={24} color="#707070" />
+              )}
+              <AuthText>{titleRedirect}</AuthText>
+              {titleRedirect !== "Back" && (
+                <AntDesign name="arrowright" size={24} color="#707070" />
+              )}
+            </AuthContainerText>
+          </TouchableOpacity>
         </AuthContainer>
       </ScrollView>
     </KeyboardAvoidingView>
