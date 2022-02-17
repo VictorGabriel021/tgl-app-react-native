@@ -20,7 +20,7 @@ import { RootStackParamList } from "../../navigation/@types";
 
 type rootScreenProp = StackNavigationProp<RootStackParamList, "Login">;
 
-const AuthPresentation = () => {
+const HomeScreen = () => {
   const navigation = useNavigation<rootScreenProp>();
 
   let CustomButton: any = TouchableOpacity;
@@ -47,4 +47,4 @@ const AuthPresentation = () => {
   );
 };
 
-export default AuthPresentation;
+export default HomeScreen;

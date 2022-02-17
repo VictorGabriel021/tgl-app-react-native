@@ -8,8 +8,8 @@ import { useForm } from "react-hook-form";
 
 import { Entypo } from "@expo/vector-icons";
 
-import AuthCard from "../../../components/Card/Card";
-import InputController from "../../../components/Input";
+import AuthCard from "../../../components/Auth/Card/Card";
+import InputController from "../../../components/Auth/Input";
 
 import { emailValidation } from "../../../helpers/formValidation";
 
@@ -21,6 +21,8 @@ import { auth } from "../../../shared/services";
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../navigation/@types";
+
+import Toast from "react-native-tiny-toast";
 
 interface IFormLogin {
   email: string;
@@ -34,6 +36,7 @@ const LoginScreen = () => {
   const {
     control,
     reset,
+    setError,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormLogin>({
@@ -52,11 +55,19 @@ const LoginScreen = () => {
   const navigation = useNavigation<rootScreenProp>();
 
   const onSubmit = async (dataForm: IFormLogin) => {
-    const response: any = await loginUser(dataForm);
-    if (!!response) {
+    try {
+      const response: any = await loginUser(dataForm);
       dispatch(login(response.data));
       reset(initialValuesForm);
       navigation.navigate("DrawerNavigator");
+    } catch (error: any) {
+      Toast.showSuccess(error, {
+        position: Toast.position.BOTTOM,
+        containerStyle: { backgroundColor: "red" },
+        textStyle: { color: "white", fontSize: 16 },
+        imgSource: require("../../../assets/images/error-icon.png"),
+        imgStyle: { tintColor: "white", height: 35, width: 35 },
+      });
     }
   };
 
@@ -65,7 +76,7 @@ const LoginScreen = () => {
       title="Authentication"
       titleRedirect="Sign Up"
       buttonText="Log In"
-      onNavigation={() => navigation.navigate("Register")}
+      onNavigation={() => navigation.replace("Register")}
       onSumbit={handleSubmit(onSubmit)}
     >
       <InputContainer>
@@ -114,7 +125,7 @@ const LoginScreen = () => {
       </InputContainer>
       <TouchableOpacity
         activeOpacity={0.5}
-        onPress={() => navigation.navigate("Reset")}
+        onPress={() => navigation.replace("Reset")}
       >
         <ForgetPasswordText>I forget my password</ForgetPasswordText>
       </TouchableOpacity>

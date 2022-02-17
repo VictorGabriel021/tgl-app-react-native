@@ -31,8 +31,9 @@ instance.interceptors.response.use(
   async (response) => {
     return response;
   },
-  function (error) {
-    return Promise.reject(error);
+  function (error: AxiosError) {
+    const handleError = error.response?.data.message;    
+    return Promise.reject(handleError);
   }
 );
 

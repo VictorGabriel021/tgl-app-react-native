@@ -1,6 +1,6 @@
 import styled from "styled-components/native";
 
-import { Colors } from "../../constants";
+import { Colors } from "../../../constants";
 
 export const AuthContainer = styled.View`
   height: 100%;

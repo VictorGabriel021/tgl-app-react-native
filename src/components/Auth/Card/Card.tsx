@@ -16,7 +16,7 @@ import {
 
 import { AntDesign } from "@expo/vector-icons";
 
-import { Colors } from "../../constants";
+import { Colors } from "../../../constants";
 
 type Props = {
   children: React.ReactNode;

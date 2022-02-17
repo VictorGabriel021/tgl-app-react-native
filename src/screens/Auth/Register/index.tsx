@@ -10,11 +10,16 @@ import { Entypo } from "@expo/vector-icons";
 
 import { emailValidation } from "../../../helpers/formValidation";
 
-import AuthCard from "../../../components/Card/Card";
-import InputController from "../../../components/Input";
+import AuthCard from "../../../components/Auth/Card/Card";
+import InputController from "../../../components/Auth/Input";
 import { StackNavigationProp } from "@react-navigation/stack";
 import { RootStackParamList } from "../../../navigation/@types";
 import { useNavigation } from "@react-navigation/native";
+
+import { user } from "../../../shared/services";
+import { useDispatch } from "react-redux";
+import { login } from "../../../store/authSlice";
+import Toast from "react-native-tiny-toast";
 
 interface IFormRegister {
   name: string;
@@ -24,15 +29,44 @@ interface IFormRegister {
 
 const RegisterScreen = () => {
   const [hidePassword, setHidePassword] = useState(true);
+  const initialValuesForm: IFormRegister = {
+    name: "",
+    email: "",
+    password: "",
+  };
 
   const {
     control,
     handleSubmit,
+    reset,
     formState: { errors },
-  } = useForm<IFormRegister>();
+  } = useForm<IFormRegister>({ defaultValues: initialValuesForm });
 
-  const onSubmit = (data: IFormRegister) => {
-    console.log(data);
+  const { createUser } = user();
+
+  const dispatch = useDispatch();
+
+  const onSubmit = async (dataForm: IFormRegister) => {
+    try {
+      const response: any = await createUser(dataForm);
+      dispatch(login(response.data));
+      reset(initialValuesForm);
+      navigation.navigate("DrawerNavigator");
+      Toast.showSuccess("Usuário cadastrado com sucesso!", {
+        position: Toast.position.BOTTOM,
+        containerStyle: { backgroundColor: "green" },
+        textStyle: { color: "white", fontSize: 16 },
+        imgStyle: { tintColor: "white", height: 35, width: 35 },
+      });
+    } catch (error: any) {
+      Toast.showSuccess("Este e-mail já está cadastrado no sistema", {
+        position: Toast.position.BOTTOM,
+        containerStyle: { backgroundColor: "red" },
+        textStyle: { color: "white", fontSize: 16 },
+        imgSource: require("../../../assets/images/error-icon.png"),
+        imgStyle: { tintColor: "white", height: 35, width: 35 },
+      });
+    }
   };
 
   type rootScreenProp = StackNavigationProp<
@@ -47,7 +81,7 @@ const RegisterScreen = () => {
       title="Registration"
       titleRedirect="Back"
       buttonText="Register"
-      onNavigation={() => navigation.navigate("Login")}
+      onNavigation={() => navigation.replace("Login")}
       onSumbit={handleSubmit(onSubmit)}
     >
       <InputContainer>

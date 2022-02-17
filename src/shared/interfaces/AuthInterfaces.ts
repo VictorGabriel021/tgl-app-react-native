@@ -3,7 +3,7 @@ export interface IBodyAuth {
   password: string;
 }
 
-interface User {
+export interface User {
   id: number;
   email: string;
   is_admin: number;
@@ -44,3 +44,31 @@ export const defaultValuesILoginResponse = {
     expires_at: "",
   },
 };
+
+export interface IBodyResetPassword {
+  email: string;
+}
+
+export interface IBodyChangePassword {
+  password: string;
+}
+
+export interface IResetResponse {
+  id: number;
+  email: string;
+  is_admin: number;
+  name: string;
+  token: string;
+  token_created_at: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface IChangePasswordResponse {
+  id: number;
+  email: string;
+  is_admin: number;
+  name: string;
+  created_at: string;
+  updated_at: string;
+}
