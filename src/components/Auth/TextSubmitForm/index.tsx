@@ -4,7 +4,7 @@ import { CardTextAction, CardTextActionContainer } from "./styles";
 
 import { AntDesign } from "@expo/vector-icons";
 
-import { Colors } from "../../../constants";
+import { Colors } from "@constants/index";
 
 type Props = {
   buttonText: string;

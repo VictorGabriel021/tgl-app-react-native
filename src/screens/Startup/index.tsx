@@ -1,16 +1,15 @@
 import { useEffect } from "react";
-
 import { ActivityIndicator } from "react-native";
-
-import { LoadingContainer } from "./styles";
 
 import { useDispatch } from "react-redux";
 
-import { Colors } from "../../constants";
+import { LoadingContainer } from "./styles";
 
-import { getUserData, isAuthenticated } from "../../helpers/auth";
+import { getUserData, isAuthenticated } from "@helpers/auth";
 
-import { login, setDidTryAutoLogin } from "../../store/authSlice";
+import { login, setDidTryAutoLogin } from "@store/authSlice";
+
+import { Colors } from "@constants/index";
 
 const StartupScreen = () => {
   const dispatch = useDispatch();

@@ -1,30 +1,31 @@
 import { useState } from "react";
-
 import { TouchableOpacity } from "react-native";
-
-import { ForgetPasswordText, InputContainer } from "../styles";
 
 import { useForm } from "react-hook-form";
 
+import { useDispatch } from "react-redux";
+
+import { ForgetPasswordText, InputContainer } from "../styles";
+
 import { Entypo } from "@expo/vector-icons";
 
-import AuthCard from "../../../components/Auth/Card/Card";
-import InputController from "../../../components/Auth/Input";
-import TextSubmitForm from "../../../components/Auth/TextSubmitForm";
-import LoadingInfo from "../../../components/LoadingInfo";
+import {
+  AuthCard,
+  InputController,
+  TextSubmitForm,
+  LoadingInfo,
+} from "@components/index";
 
-import { emailValidation } from "../../../helpers/formValidation";
+import { emailValidation, toastShowError } from "@helpers/index";
 
-import { useDispatch } from "react-redux";
-import { login } from "../../../store/authSlice";
+import { login } from "@store/authSlice";
 
-import { auth } from "../../../shared/services";
+import { auth } from "@shared/services";
 
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { AuthParamList } from "../../../navigation/@types";
 
-import { toastShowError } from "../../../helpers/toastInfo";
+import { AuthParamList } from "@navigation/@types";
 
 interface IFormLogin {
   email: string;

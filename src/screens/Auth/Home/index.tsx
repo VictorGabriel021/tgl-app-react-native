@@ -20,7 +20,7 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
-import { AuthParamList } from "../../navigation/@types";
+import { AuthParamList } from "@navigation/@types";
 
 type rootScreenProp = StackNavigationProp<AuthParamList, "Login">;
 

@@ -2,24 +2,23 @@ import { useState } from "react";
 
 import { useForm } from "react-hook-form";
 
-import { InputContainer } from "../styles";
-
-import { emailValidation } from "../../../helpers/formValidation";
-
-import AuthCard from "../../../components/Auth/Card/Card";
-import InputController from "../../../components/Auth/Input";
-import LoadingInfo from "../../../components/LoadingInfo";
-
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 
-import { AuthParamList } from "../../../navigation/@types";
+import { InputContainer } from "../styles";
 
-import { auth } from "../../../shared/services";
+import { emailValidation, toastShowError } from "@helpers/index";
 
-import TextSubmitForm from "../../../components/Auth/TextSubmitForm";
+import {
+  AuthCard,
+  InputController,
+  LoadingInfo,
+  TextSubmitForm,
+} from "@components/index";
 
-import { toastShowError } from "../../../helpers/toastInfo";
+import { AuthParamList } from "@navigation/@types";
+
+import { auth } from "@shared/services";
 
 interface IFormReset {
   email: string;

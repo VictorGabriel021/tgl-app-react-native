@@ -1,16 +1,18 @@
 import { Platform } from "react-native";
 
-import { Colors } from "../../constants";
+import { Colors } from "@constants/index";
 
-import { AuthParamList } from "../@types";
+import { AuthParamList } from "@navigation/@types";
 
 import { createStackNavigator } from "@react-navigation/stack";
 
-import HomeScreen from "../../screens/Home/Home";
-import LoginScreen from "../../screens/Auth/Login";
-import RegisterScreen from "../../screens/Auth/Register";
-import ResetScreen from "../../screens/Auth/Reset";
-import ChangePasswordScreen from "../../screens/Auth/ChangePassword";
+import {
+  HomeScreen,
+  LoginScreen,
+  RegisterScreen,
+  ResetScreen,
+  ChangePasswordScreen,
+} from "@screens/Auth";
 
 const screenOptionsDefault = {
   headerStyle: {

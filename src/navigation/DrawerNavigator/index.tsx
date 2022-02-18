@@ -1,5 +1,7 @@
 import { Button, Platform, TouchableOpacity } from "react-native";
 
+import { useDispatch } from "react-redux";
+
 import {
   ContainerButton,
   DrawerContainer,
@@ -7,7 +9,7 @@ import {
   DrawerUserText,
 } from "./styles";
 
-import { Colors } from "../../constants";
+import { Colors } from "@constants/index";
 
 import {
   Entypo,
@@ -16,8 +18,6 @@ import {
   MaterialCommunityIcons,
 } from "@expo/vector-icons";
 
-import { DrawerParamList } from "../@types";
-
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 import {
@@ -25,11 +25,11 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 
-import { useDispatch } from "react-redux";
-import { logout } from "../../store/authSlice";
+import { DrawerParamList } from "@navigation/@types";
 
-import LotteryListScreen from "../../screens/Lottery/List";
-import UserScreen from "../../screens/User";
+import { logout } from "@store/authSlice";
+
+import { LotteryListScreen, UserProfileScreen } from "@screens/index";
 
 const screenOptionsDefault = {
   headerStyle: {
@@ -106,7 +106,7 @@ const DrawerNavigator = () => {
       />
       <DrawerNav.Screen
         name="User"
-        component={UserScreen}
+        component={UserProfileScreen}
         options={{
           drawerLabel: "User",
           drawerIcon: (props) => (

@@ -1,6 +1,6 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-import { ILoginResponse } from "../shared/interfaces";
+import { ILoginResponse } from "@shared/interfaces";
 
 export const getUserData = async () => {
   const userAuth = (await AsyncStorage.getItem("userData")) || "{}";

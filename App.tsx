@@ -5,10 +5,11 @@ import { useState } from "react";
 import * as Font from "expo-font";
 import AppLoading from "expo-app-loading";
 
-import Navigation from "./src/navigation";
+import Navigation from "@navigation/NavigatorContainer";
 
 import { Provider } from "react-redux";
-import { store } from "./src/store/store";
+
+import { store } from "@store/store";
 
 const fetchFonts = () => {
   return Font.loadAsync({

@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
 
-import { RootState } from "../store/store";
+import { RootState } from "@store/store";
 
 import { NavigationContainer } from "@react-navigation/native";
 
-import StartupScreen from "../screens/Startup";
-import AuthNavigator from "./AuthNavigator";
-import DrawerNavigator from "./DrawerNavigator";
+import StartupScreen from "@screens/Startup";
+
+import { AuthNavigator, DrawerNavigator } from "@navigation/index";
 
 const Navigation = () => {
   const { isAuthenticated, didTryAutoLogin } = useSelector(

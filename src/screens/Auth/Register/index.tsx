@@ -1,31 +1,35 @@
 import { useState } from "react";
-
 import { TouchableOpacity } from "react-native";
-
-import { InputContainer } from "../styles";
-
-import { useForm } from "react-hook-form";
-
-import { Entypo } from "@expo/vector-icons";
-
-import { emailValidation } from "../../../helpers/formValidation";
-
-import AuthCard from "../../../components/Auth/Card/Card";
-import InputController from "../../../components/Auth/Input";
-import TextSubmitForm from "../../../components/Auth/TextSubmitForm";
-import LoadingInfo from "../../../components/LoadingInfo";
-
-import { StackNavigationProp } from "@react-navigation/stack";
-import { AuthParamList } from "../../../navigation/@types";
-import { useNavigation } from "@react-navigation/native";
-
-import { user } from "../../../shared/services";
 
 import { useDispatch } from "react-redux";
 
-import { login } from "../../../store/authSlice";
+import { useForm } from "react-hook-form";
 
-import { toastShowError, toastShowSuccess } from "../../../helpers/toastInfo";
+import { InputContainer } from "../styles";
+
+import { Entypo } from "@expo/vector-icons";
+
+import {
+  emailValidation,
+  toastShowError,
+  toastShowSuccess,
+} from "@helpers/index";
+
+import {
+  AuthCard,
+  InputController,
+  TextSubmitForm,
+  LoadingInfo,
+} from "@components/index";
+
+import { StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
+
+import { AuthParamList } from "@navigation/@types";
+
+import { user } from "@shared/services";
+
+import { login } from "@store/authSlice";
 
 interface IFormRegister {
   name: string;

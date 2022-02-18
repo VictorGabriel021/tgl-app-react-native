@@ -1,4 +1,4 @@
-import { IBodyRegister, ICreateUserResponse } from "../../interfaces";
+import { IBodyRegister, ICreateUserResponse } from "@shared/interfaces";
 
 export interface IRegister {
   createUser: ({

@@ -1,26 +1,27 @@
 import { useState } from "react";
-
 import { TouchableOpacity } from "react-native";
-
-import { InputContainer } from "../styles";
 
 import { useForm } from "react-hook-form";
 
-import { Entypo } from "@expo/vector-icons";
+import { InputContainer } from "../styles";
 
-import { AuthParamList } from "../../../navigation/@types";
+import { Entypo } from "@expo/vector-icons";
 
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
-import AuthCard from "../../../components/Auth/Card/Card";
-import InputController from "../../../components/Auth/Input";
-import TextSubmitForm from "../../../components/Auth/TextSubmitForm";
-import LoadingInfo from "../../../components/LoadingInfo";
+import { AuthParamList } from "@navigation/@types";
 
-import { auth } from "../../../shared/services";
+import { toastShowError, toastShowSuccess } from "@helpers/toastInfo";
 
-import { toastShowError, toastShowSuccess } from "../../../helpers/toastInfo";
+import {
+  AuthCard,
+  InputController,
+  TextSubmitForm,
+  LoadingInfo,
+} from "@components/index";
+
+import { auth } from "@shared/services";
 
 interface IFormChangePassword {
   password: string;

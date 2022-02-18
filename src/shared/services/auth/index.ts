@@ -7,7 +7,8 @@ import {
   IChangePasswordResponse,
   ILoginResponse,
   IResetResponse,
-} from "../../interfaces";
+} from "@shared/interfaces";
+
 import { IAuth } from "./interfaces";
 
 const auth = (): IAuth => {
@@ -15,11 +16,16 @@ const auth = (): IAuth => {
     return instance.post("/login", body);
   }
 
-  async function resetPassword(body: IBodyResetPassword): Promise<IResetResponse> {
+  async function resetPassword(
+    body: IBodyResetPassword
+  ): Promise<IResetResponse> {
     return instance.post("/reset", body);
   }
 
-  async function changePassword(resetToken: string, body: IBodyChangePassword): Promise<IChangePasswordResponse> {    
+  async function changePassword(
+    resetToken: string,
+    body: IBodyChangePassword
+  ): Promise<IChangePasswordResponse> {
     return instance.post(`/reset/${resetToken}`, body);
   }
 

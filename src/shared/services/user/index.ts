@@ -1,6 +1,7 @@
 import instance from "../axios.config";
 
-import { IBodyRegister, ICreateUserResponse } from "../../interfaces";
+import { IBodyRegister, ICreateUserResponse } from "@shared/interfaces";
+
 import { IRegister } from "./interfaces";
 
 const user = (): IRegister => {
