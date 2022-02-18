@@ -10,6 +10,8 @@ import { Entypo } from "@expo/vector-icons";
 
 import AuthCard from "../../../components/Auth/Card/Card";
 import InputController from "../../../components/Auth/Input";
+import TextSubmitForm from "../../../components/Auth/TextSubmitForm";
+import LoadingInfo from "../../../components/LoadingInfo";
 
 import { emailValidation } from "../../../helpers/formValidation";
 
@@ -20,9 +22,9 @@ import { auth } from "../../../shared/services";
 
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../../../navigation/@types";
+import { AuthParamList } from "../../../navigation/@types";
 
-import Toast from "react-native-tiny-toast";
+import { toastShowError } from "../../../helpers/toastInfo";
 
 interface IFormLogin {
   email: string;
@@ -31,12 +33,15 @@ interface IFormLogin {
 
 const initialValuesForm: IFormLogin = { email: "", password: "" };
 
+type rootScreenProp = StackNavigationProp<AuthParamList, "Home">;
+
 const LoginScreen = () => {
   const [hidePassword, setHidePassword] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     control,
     reset,
-    setError,
     handleSubmit,
     formState: { errors },
   } = useForm<IFormLogin>({
@@ -47,37 +52,25 @@ const LoginScreen = () => {
 
   const { loginUser } = auth();
 
-  type rootScreenProp = StackNavigationProp<
-    RootStackParamList,
-    "DrawerNavigator"
-  >;
-
   const navigation = useNavigation<rootScreenProp>();
 
   const onSubmit = async (dataForm: IFormLogin) => {
+    setIsLoading(true);
     try {
       const response: any = await loginUser(dataForm);
       dispatch(login(response.data));
       reset(initialValuesForm);
-      navigation.navigate("DrawerNavigator");
     } catch (error: any) {
-      Toast.showSuccess(error, {
-        position: Toast.position.BOTTOM,
-        containerStyle: { backgroundColor: "red" },
-        textStyle: { color: "white", fontSize: 16 },
-        imgSource: require("../../../assets/images/error-icon.png"),
-        imgStyle: { tintColor: "white", height: 35, width: 35 },
-      });
+      toastShowError("Invalid password or email!");
     }
+    setIsLoading(false);
   };
 
   return (
     <AuthCard
       title="Authentication"
       titleRedirect="Sign Up"
-      buttonText="Log In"
       onNavigation={() => navigation.replace("Register")}
-      onSumbit={handleSubmit(onSubmit)}
     >
       <InputContainer>
         <InputController
@@ -129,6 +122,10 @@ const LoginScreen = () => {
       >
         <ForgetPasswordText>I forget my password</ForgetPasswordText>
       </TouchableOpacity>
+      {isLoading && <LoadingInfo />}
+      {!isLoading && (
+        <TextSubmitForm buttonText="Log In" onSumbit={handleSubmit(onSubmit)} />
+      )}
     </AuthCard>
   );
 };

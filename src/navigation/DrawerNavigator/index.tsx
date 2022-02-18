@@ -1,18 +1,35 @@
-import { createDrawerNavigator } from "@react-navigation/drawer";
+import { Button, Platform, TouchableOpacity } from "react-native";
 
-import { RootDrawerParamList, RootStackParamList } from "../@types";
+import {
+  ContainerButton,
+  DrawerContainer,
+  DrawerUserContainer,
+  DrawerUserText,
+} from "./styles";
 
-import LotteryListScreen from "../../screens/Lottery/List";
-import UserScreen from "../../screens/User";
-import { Platform, Text, TouchableOpacity, View } from "react-native";
 import { Colors } from "../../constants";
-import { Ionicons } from "@expo/vector-icons";
-import { StackNavigationProp } from "@react-navigation/stack";
+
+import {
+  Entypo,
+  FontAwesome,
+  Ionicons,
+  MaterialCommunityIcons,
+} from "@expo/vector-icons";
+
+import { DrawerParamList } from "../@types";
+
 import { useNavigation } from "@react-navigation/native";
+import { StackNavigationProp } from "@react-navigation/stack";
+import {
+  createDrawerNavigator,
+  DrawerItemList,
+} from "@react-navigation/drawer";
+
 import { useDispatch } from "react-redux";
 import { logout } from "../../store/authSlice";
 
-const DrawerNav = createDrawerNavigator<RootDrawerParamList>();
+import LotteryListScreen from "../../screens/Lottery/List";
+import UserScreen from "../../screens/User";
 
 const screenOptionsDefault = {
   headerStyle: {
@@ -21,19 +38,16 @@ const screenOptionsDefault = {
   headerTintColor: Platform.OS === "android" ? "white" : Colors.primary,
 };
 
-type rootScreenProp = StackNavigationProp<RootStackParamList, "Home">;
+const DrawerNav = createDrawerNavigator<DrawerParamList>();
 
-type drawerScreenProp = StackNavigationProp<RootDrawerParamList, "User">;
+type drawerScreenProp = StackNavigationProp<DrawerParamList, "User">;
 
 const DrawerNavigator = () => {
-  const navigationRoot = useNavigation<rootScreenProp>();
   const navigationDrawer = useNavigation<drawerScreenProp>();
-
   const dispatch = useDispatch();
 
   const logoutHandler = async () => {
     await dispatch(logout());
-    navigationRoot.navigate("Home");
   };
 
   return (
@@ -46,21 +60,48 @@ const DrawerNavigator = () => {
         drawerInactiveTintColor: "white",
       }}
       initialRouteName="LotteryList"
+      drawerContent={(props) => {
+        return (
+          <DrawerContainer>
+            <DrawerItemList {...props} />
+            <ContainerButton>
+              <Button
+                title="Logout"
+                color={Colors.primary}
+                onPress={logoutHandler}
+              />
+            </ContainerButton>
+          </DrawerContainer>
+        );
+      }}
+      detachInactiveScreens={false}
     >
       <DrawerNav.Screen
         name="LotteryList"
         component={LotteryListScreen}
         options={{
+          headerTitle: "TGL",
           drawerLabel: "Recent Games",
+          drawerIcon: (props) => (
+            <Entypo
+              style={{ width: 25 }}
+              name="ticket"
+              size={props.size}
+              color={props.color}
+            />
+          ),
           headerRight: () => (
             <TouchableOpacity
               activeOpacity={0.7}
+              style={{ marginRight: 15 }}
               onPress={() => navigationDrawer.navigate("User")}
             >
-              <Ionicons name="add" size={28} color="white" />
+              <DrawerUserContainer>
+                <DrawerUserText>Add</DrawerUserText>
+                <Ionicons name="add" size={28} color="white" />
+              </DrawerUserContainer>
             </TouchableOpacity>
           ),
-          headerRightContainerStyle: { marginRight: 15 },
         }}
       />
       <DrawerNav.Screen
@@ -68,12 +109,26 @@ const DrawerNavigator = () => {
         component={UserScreen}
         options={{
           drawerLabel: "User",
+          drawerIcon: (props) => (
+            <FontAwesome
+              style={{ width: 25 }}
+              name={"user"}
+              size={props.size}
+              color={props.color}
+            />
+          ),
           headerRight: () => (
-            <TouchableOpacity activeOpacity={0.7} onPress={logoutHandler}>
-              <Text style={{ color: "white" }}>Logout</Text>
+            <TouchableOpacity
+              activeOpacity={0.7}
+              style={{ marginRight: 15 }}
+              onPress={logoutHandler}
+            >
+              <DrawerUserContainer>
+                <DrawerUserText>Logout</DrawerUserText>
+                <MaterialCommunityIcons name="logout" size={20} color="white" />
+              </DrawerUserContainer>
             </TouchableOpacity>
           ),
-          headerRightContainerStyle: { marginRight: 15 },
         }}
       />
     </DrawerNav.Navigator>

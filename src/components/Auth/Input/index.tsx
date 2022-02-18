@@ -2,9 +2,17 @@ import { Text } from "react-native";
 
 import { InputContent, Input, ErrorMessage } from "./styles";
 
-import { Props } from "../../@types/InputControllerTypes";
-
 import { useController } from "react-hook-form";
+
+type Props = {
+  label: string;
+  name: string;
+  error: any;
+  errorMessage: any;
+  control: any;
+  rules?: any;
+  secureTextEntry?: boolean;
+};
 
 const InputController = ({
   label,

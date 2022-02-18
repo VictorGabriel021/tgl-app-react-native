@@ -15,7 +15,7 @@ export interface User {
   picture?: any;
 }
 
-interface Token {
+export interface Token {
   type: string;
   token: string;
   expires_at: string;

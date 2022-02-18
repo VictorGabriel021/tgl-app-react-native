@@ -1,7 +1,5 @@
 import styled from "styled-components/native";
 
-import { Colors } from "../../../constants";
-
 export const AuthContainer = styled.View`
   height: 100%;
   padding: 10px 0;
@@ -29,15 +27,5 @@ export const CardContainer = styled.View`
 `;
 
 export const CardContent = styled.View`
-  height: 70%;
-`;
-
-export const CardTextActionContainer = styled.View`
-  height: 30%;
-  align-items: center;
-  justify-content: flex-end;
-`;
-
-export const CardTextAction = styled(AuthText)`
-  color: ${Colors.secondary};
+  height: 100%;
 `;

@@ -6,19 +6,23 @@ import {
 
 import {
   AuthContainer,
+  AuthContent,
   AuthTitle,
   AuthTitleLottery,
   ButtonContainer,
   Button,
   ButtonText,
+  ButtonRegister,
+  ButtonRegisterText,
+  ButtonLoginText,
 } from "./styles";
 
 import { useNavigation } from "@react-navigation/native";
 import { StackNavigationProp } from "@react-navigation/stack";
 
-import { RootStackParamList } from "../../navigation/@types";
+import { AuthParamList } from "../../navigation/@types";
 
-type rootScreenProp = StackNavigationProp<RootStackParamList, "Login">;
+type rootScreenProp = StackNavigationProp<AuthParamList, "Login">;
 
 const HomeScreen = () => {
   const navigation = useNavigation<rootScreenProp>();
@@ -32,17 +36,33 @@ const HomeScreen = () => {
     navigation.navigate("Login");
   };
 
+  const navigateToRegisterHandler = () => {
+    navigation.navigate("Register");
+  };
+
   return (
     <AuthContainer>
-      <AuthTitle>The Greatest App</AuthTitle>
-      <ButtonContainer>
-        <CustomButton activeOpacity={0.7} onPress={navigateToLoginHandler}>
-          <Button>
-            <ButtonText>for</ButtonText>
-          </Button>
+      <AuthContent>
+        <AuthTitle>The Greatest App</AuthTitle>
+        <ButtonContainer>
+          <CustomButton activeOpacity={0.7} onPress={navigateToLoginHandler}>
+            <Button>
+              <ButtonText>for</ButtonText>
+            </Button>
+          </CustomButton>
+        </ButtonContainer>
+        <AuthTitleLottery>LOTTERY</AuthTitleLottery>
+      </AuthContent>
+      <AuthContent>
+        <CustomButton activeOpacity={0.7} onPress={navigateToRegisterHandler}>
+          <ButtonRegister>
+            <ButtonRegisterText>Sign Up</ButtonRegisterText>
+          </ButtonRegister>
         </CustomButton>
-      </ButtonContainer>
-      <AuthTitleLottery>LOTTERY</AuthTitleLottery>
+        <TouchableOpacity activeOpacity={0.4} onPress={navigateToLoginHandler}>
+          <ButtonLoginText>Sign In</ButtonLoginText>
+        </TouchableOpacity>
+      </AuthContent>
     </AuthContainer>
   );
 };

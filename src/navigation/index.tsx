@@ -1,31 +1,23 @@
+import { useSelector } from "react-redux";
+
+import { RootState } from "../store/store";
+
 import { NavigationContainer } from "@react-navigation/native";
 
-import { useDispatch } from "react-redux";
-
-import { getUserData, isAuthenticated } from "../helpers/auth";
-
-import { authenticated } from "../store/authSlice";
-
-import { useEffect } from "react";
-import StackNavigator from "./StackNavigator";
+import StartupScreen from "../screens/Startup";
+import AuthNavigator from "./AuthNavigator";
+import DrawerNavigator from "./DrawerNavigator";
 
 const Navigation = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const userData = await getUserData();
-      const getAuthenticated = await isAuthenticated();
-      dispatch(
-        authenticated({ ...userData, isAuthenticated: getAuthenticated })
-      );
-    };
-    fetchData();
-  }, []);
+  const { isAuthenticated, didTryAutoLogin } = useSelector(
+    (state: RootState) => state.auth
+  );
 
   return (
     <NavigationContainer>
-      <StackNavigator />
+      {isAuthenticated && <DrawerNavigator />}
+      {!isAuthenticated && didTryAutoLogin && <AuthNavigator />}
+      {!isAuthenticated && !didTryAutoLogin && <StartupScreen />}
     </NavigationContainer>
   );
 };

@@ -12,14 +12,20 @@ import { emailValidation } from "../../../helpers/formValidation";
 
 import AuthCard from "../../../components/Auth/Card/Card";
 import InputController from "../../../components/Auth/Input";
+import TextSubmitForm from "../../../components/Auth/TextSubmitForm";
+import LoadingInfo from "../../../components/LoadingInfo";
+
 import { StackNavigationProp } from "@react-navigation/stack";
-import { RootStackParamList } from "../../../navigation/@types";
+import { AuthParamList } from "../../../navigation/@types";
 import { useNavigation } from "@react-navigation/native";
 
 import { user } from "../../../shared/services";
+
 import { useDispatch } from "react-redux";
+
 import { login } from "../../../store/authSlice";
-import Toast from "react-native-tiny-toast";
+
+import { toastShowError, toastShowSuccess } from "../../../helpers/toastInfo";
 
 interface IFormRegister {
   name: string;
@@ -27,13 +33,17 @@ interface IFormRegister {
   password: string;
 }
 
+const initialValuesForm: IFormRegister = {
+  name: "",
+  email: "",
+  password: "",
+};
+
+type rootScreenProp = StackNavigationProp<AuthParamList, "Login">;
+
 const RegisterScreen = () => {
   const [hidePassword, setHidePassword] = useState(true);
-  const initialValuesForm: IFormRegister = {
-    name: "",
-    email: "",
-    password: "",
-  };
+  const [isLoading, setIsLoading] = useState(false);
 
   const {
     control,
@@ -46,43 +56,27 @@ const RegisterScreen = () => {
 
   const dispatch = useDispatch();
 
+  const navigation = useNavigation<rootScreenProp>();
+
   const onSubmit = async (dataForm: IFormRegister) => {
+    setIsLoading(true);
     try {
       const response: any = await createUser(dataForm);
       dispatch(login(response.data));
       reset(initialValuesForm);
-      navigation.navigate("DrawerNavigator");
-      Toast.showSuccess("Usuário cadastrado com sucesso!", {
-        position: Toast.position.BOTTOM,
-        containerStyle: { backgroundColor: "green" },
-        textStyle: { color: "white", fontSize: 16 },
-        imgStyle: { tintColor: "white", height: 35, width: 35 },
-      });
+      setIsLoading(false);
+      toastShowSuccess("Successful registered user!");
     } catch (error: any) {
-      Toast.showSuccess("Este e-mail já está cadastrado no sistema", {
-        position: Toast.position.BOTTOM,
-        containerStyle: { backgroundColor: "red" },
-        textStyle: { color: "white", fontSize: 16 },
-        imgSource: require("../../../assets/images/error-icon.png"),
-        imgStyle: { tintColor: "white", height: 35, width: 35 },
-      });
+      setIsLoading(false);
+      toastShowError("This email is already registered in the system!");
     }
   };
-
-  type rootScreenProp = StackNavigationProp<
-    RootStackParamList,
-    "DrawerNavigator"
-  >;
-
-  const navigation = useNavigation<rootScreenProp>();
 
   return (
     <AuthCard
       title="Registration"
       titleRedirect="Back"
-      buttonText="Register"
       onNavigation={() => navigation.replace("Login")}
-      onSumbit={handleSubmit(onSubmit)}
     >
       <InputContainer>
         <InputController
@@ -143,6 +137,13 @@ const RegisterScreen = () => {
           )}
         </TouchableOpacity>
       </InputContainer>
+      {isLoading && <LoadingInfo />}
+      {!isLoading && (
+        <TextSubmitForm
+          buttonText="Register"
+          onSumbit={handleSubmit(onSubmit)}
+        />
+      )}
     </AuthCard>
   );
 };

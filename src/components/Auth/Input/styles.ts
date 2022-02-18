@@ -2,6 +2,7 @@ import styled from "styled-components/native";
 
 export const InputContent = styled.View`
   flex-direction: column;
+  width: 85%;
 `;
 
 export const Input = styled.TextInput`

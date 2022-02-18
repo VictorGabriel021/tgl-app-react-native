@@ -1,12 +1,12 @@
-export type RootStackParamList = {
+export type AuthParamList = {
   Home: undefined;
   Login: undefined;
   Reset: undefined;
+  ChangePassword: { resetToken: string };
   Register: undefined;
-  DrawerNavigator: undefined;
 };
 
-export type RootDrawerParamList = {
+export type DrawerParamList = {
   LotteryList: undefined;
   User: undefined;
 };

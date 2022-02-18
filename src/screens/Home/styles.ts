@@ -3,11 +3,14 @@ import styled from "styled-components/native";
 import { Colors } from "../../constants";
 
 export const AuthContainer = styled.View`
-  align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   padding: 20px;
   overflow: hidden;
   height: 100%;
+`;
+
+export const AuthContent = styled.View`
+  align-items: center;
 `;
 
 export const AuthTitle = styled.Text`
@@ -38,4 +41,18 @@ export const ButtonText = styled.Text`
   color: #fff;
   font-size: 18px;
   font-family: "helvetica-neue-bold-italic";
+`;
+
+export const ButtonRegister = styled(Button)`
+  background-color: ${Colors.primary};
+  width: 140px;
+  margin-bottom: 20px;
+`;
+
+export const ButtonRegisterText = styled(ButtonText)`
+  font-family: "helvetica-neue-bold";
+`;
+
+export const ButtonLoginText = styled(ButtonRegisterText)`
+  color: ${Colors.secondary};
 `;

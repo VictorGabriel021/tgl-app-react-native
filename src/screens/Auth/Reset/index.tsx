@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { useForm } from "react-hook-form";
 
 import { InputContainer } from "../styles";
@@ -7,24 +8,30 @@ import { emailValidation } from "../../../helpers/formValidation";
 
 import AuthCard from "../../../components/Auth/Card/Card";
 import InputController from "../../../components/Auth/Input";
+import LoadingInfo from "../../../components/LoadingInfo";
 
 import { StackNavigationProp } from "@react-navigation/stack";
 import { useNavigation } from "@react-navigation/native";
 
-import { RootStackParamList } from "../../../navigation/@types";
+import { AuthParamList } from "../../../navigation/@types";
 
 import { auth } from "../../../shared/services";
 
-import Toast from "react-native-tiny-toast";
-import ChangePasswordScreen from "../ChangePassword";
+import TextSubmitForm from "../../../components/Auth/TextSubmitForm";
+
+import { toastShowError } from "../../../helpers/toastInfo";
 
 interface IFormReset {
   email: string;
-  password: string;
 }
 
+const initialValuesForm = { email: "" };
+
+type rootScreenProp = StackNavigationProp<AuthParamList, "ChangePassword">;
+
 const ResetScreen = () => {
-  const initialValuesForm = { email: "" };
+  const [isLoading, setIsLoading] = useState(false);
+
   const {
     control,
     handleSubmit,
@@ -32,43 +39,29 @@ const ResetScreen = () => {
     formState: { errors },
   } = useForm<IFormReset>({ defaultValues: initialValuesForm });
 
-  const { resetPassword } = auth();
-  const [resetToken, setResetToken] = useState("");
-
-  const onSubmit = async (dataForm: IFormReset) => {
-    try {
-      const response: any = await resetPassword(dataForm);
-      setResetToken(response.data.token);
-      reset(initialValuesForm);
-    } catch (error: any) {
-      Toast.showSuccess(error, {
-        position: Toast.position.BOTTOM,
-        containerStyle: { backgroundColor: "red" },
-        textStyle: { color: "white", fontSize: 16 },
-        imgSource: require("../../../assets/images/error-icon.png"),
-        imgStyle: { tintColor: "white", height: 35, width: 35 },
-      });
-    }
-  };
-
-  type rootScreenProp = StackNavigationProp<
-    RootStackParamList,
-    "DrawerNavigator"
-  >;
-
   const navigation = useNavigation<rootScreenProp>();
 
-  if (resetToken.length > 0) {
-    return <ChangePasswordScreen resetToken={resetToken} />;
-  }
+  const { resetPassword } = auth();
+
+  const onSubmit = async (dataForm: IFormReset) => {
+    setIsLoading(true);
+    try {
+      const response: any = await resetPassword(dataForm);
+      reset(initialValuesForm);
+      navigation.navigate("ChangePassword", {
+        resetToken: response.data.token,
+      });
+    } catch (error: any) {
+      toastShowError("User not found in database!");
+    }
+    setIsLoading(false);
+  };
 
   return (
     <AuthCard
       title="Reset password"
       titleRedirect="Back"
-      buttonText="Send link"
       onNavigation={() => navigation.replace("Login")}
-      onSumbit={handleSubmit(onSubmit)}
     >
       <InputContainer>
         <InputController
@@ -86,6 +79,13 @@ const ResetScreen = () => {
           }}
         />
       </InputContainer>
+      {isLoading && <LoadingInfo />}
+      {!isLoading && (
+        <TextSubmitForm
+          buttonText="Send Link"
+          onSumbit={handleSubmit(onSubmit)}
+        />
+      )}
     </AuthCard>
   );
 };
