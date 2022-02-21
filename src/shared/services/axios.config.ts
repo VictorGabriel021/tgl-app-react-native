@@ -1,7 +1,9 @@
 import axios, { AxiosError } from "axios";
 
+import { getToken } from "@helpers/auth";
+
 const instance = axios.create({
-  baseURL: "http://192.168.0.3:3333",
+  baseURL: "http://192.168.0.7:3333",
   //baseURL: "http://192.168.0.103:3333",
   headers: {
     Accept: "application/json",
@@ -11,10 +13,9 @@ const instance = axios.create({
 
 instance.interceptors.request.use(
   async (config) => {
-    const isToken = false;
-
-    if (isToken) {
-      config.headers!.Authorization = "Bearer " + isToken;
+    const token = await getToken();
+    if (token) {
+      config.headers!.Authorization = "Bearer " + token;
     }
     return config;
   },
@@ -32,7 +33,7 @@ instance.interceptors.response.use(
     return response;
   },
   function (error: AxiosError) {
-    const handleError = error.response?.data.message;    
+    const handleError = error.response?.data.message;
     return Promise.reject(handleError);
   }
 );

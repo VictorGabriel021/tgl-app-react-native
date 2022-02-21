@@ -8,5 +8,6 @@ export type AuthParamList = {
 
 export type DrawerParamList = {
   LotteryList: undefined;
+  LotteryBet: undefined;
   User: undefined;
 };

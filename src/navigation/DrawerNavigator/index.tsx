@@ -29,7 +29,11 @@ import { DrawerParamList } from "@navigation/@types";
 
 import { logout } from "@store/authSlice";
 
-import { LotteryListScreen, UserProfileScreen } from "@screens/index";
+import {
+  LotteryListScreen,
+  LotteryBetScreen,
+  UserProfileScreen,
+} from "@screens/index";
 
 const screenOptionsDefault = {
   headerStyle: {
@@ -94,16 +98,17 @@ const DrawerNavigator = () => {
             <TouchableOpacity
               activeOpacity={0.7}
               style={{ marginRight: 15 }}
-              onPress={() => navigationDrawer.navigate("User")}
+              onPress={() => navigationDrawer.navigate("LotteryBet")}
             >
               <DrawerUserContainer>
-                <DrawerUserText>Add</DrawerUserText>
+                <DrawerUserText>New Bet</DrawerUserText>
                 <Ionicons name="add" size={28} color="white" />
               </DrawerUserContainer>
             </TouchableOpacity>
           ),
         }}
       />
+      <DrawerNav.Screen name="LotteryBet" component={LotteryBetScreen} />
       <DrawerNav.Screen
         name="User"
         component={UserProfileScreen}

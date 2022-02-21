@@ -22,3 +22,8 @@ export const isAuthenticated = async () => {
     !!isTokenValid(userData.token.expires_at)
   );
 };
+
+export const getToken = async () => {
+  const userData = await getUserData();
+  return userData.token?.token;
+};
