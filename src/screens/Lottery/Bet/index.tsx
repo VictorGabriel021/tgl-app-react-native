@@ -1,5 +1,7 @@
 import { ScrollView, TouchableOpacity } from "react-native";
 
+import { useEffect, useState } from "react";
+
 import {
   LotteryBetContainerScroll,
   LotteryBetContainer,
@@ -8,14 +10,8 @@ import {
   LotteryBetTitleTextBold,
   LotteryBetChooseGame,
   LotteryBetText,
-  LotteryBetFilterContainer,
-  LotteryBetFilterBtn,
-  LotteryBetFilterBtnText,
   LotteryBetDescriptionContainer,
   LotteryBetDescription,
-  LotteryBetNumberContainer,
-  LotteryBetNumberContent,
-  LotteryBetNumber,
   LotteryBetActionButtonContainer,
   LotteryBetActionButton,
   LotteryBetActionButtonText,
@@ -25,53 +21,72 @@ import {
 
 import { AntDesign } from "@expo/vector-icons";
 
+import { IGame, IGamesResponse } from "@shared/interfaces";
+
+import { games } from "@shared/services";
+
+import LotteryBetFilter from "./Filter";
+
+import LotteryBetNumbers from "./Numbers";
+
+import ErrorMessage from "@components/ErrorMessage";
+import LoadingInfo from "@components/LoadingInfo";
+
 const LotteryBetScreen = () => {
+  const { listGames } = games();
+
+  const [gamesList, setGamesList] = useState<IGamesResponse>();
+  const [gameSelected, setGameSelected] = useState<IGame>();
+  const [isLoading, setIsloading] = useState(false);
+
+  const selectFilterHandler = (game: IGame) => {
+    setGameSelected(game);
+  };
+
+  useEffect(() => {
+    const getGamesData = async () => {
+      setIsloading(true);
+      try {
+        const response: any = await listGames();
+        setGamesList(response.data);
+        setGameSelected(response.data.types[0]);
+      } catch (error) {}
+      setIsloading(false);
+    };
+    getGamesData();
+  }, []);
+
+  if (isLoading) {
+    return <LoadingInfo size="large" />;
+  }
+
+  if (!gamesList || !gameSelected) {
+    return <ErrorMessage />;
+  }
+
   return (
     <LotteryBetContainerScroll>
-      <ScrollView>
+      <ScrollView scrollEnabled>
         <LotteryBetContainer>
           <LotteryBetTitleContainer>
             <LotteryBetTitleTextBold>NEW BET</LotteryBetTitleTextBold>
-            <LotteryBetTitleText>FOR MEGA-SENA</LotteryBetTitleText>
+            <LotteryBetTitleText>FOR {gameSelected?.type}</LotteryBetTitleText>
           </LotteryBetTitleContainer>
-
           <LotteryBetChooseGame>
             <LotteryBetText>Choose a game</LotteryBetText>
           </LotteryBetChooseGame>
-
-          <LotteryBetFilterContainer>
-            <LotteryBetFilterBtn>
-              <LotteryBetFilterBtnText numberOfLines={2}>
-                Lotofácil
-              </LotteryBetFilterBtnText>
-            </LotteryBetFilterBtn>
-            <LotteryBetFilterBtn>
-              <LotteryBetFilterBtnText numberOfLines={2}>
-                Mega Sena
-              </LotteryBetFilterBtnText>
-            </LotteryBetFilterBtn>
-            <LotteryBetFilterBtn>
-              <LotteryBetFilterBtnText numberOfLines={2}>
-                Lotomania
-              </LotteryBetFilterBtnText>
-            </LotteryBetFilterBtn>
-          </LotteryBetFilterContainer>
-
+          <LotteryBetFilter
+            gamesList={gamesList}
+            gameSelected={gameSelected}
+            selectFilterHandler={selectFilterHandler}
+          />
           <LotteryBetDescriptionContainer>
             <LotteryBetText>Fill your bet</LotteryBetText>
             <LotteryBetDescription>
-              Fill your bet Mark as many numbers as you want up to a maximum of
-              50. Win by hitting 15, 16, 17, 18, 19, 20 or none of the 20
-              numbers drawn.
+              {gameSelected?.description}
             </LotteryBetDescription>
           </LotteryBetDescriptionContainer>
-
-          <LotteryBetNumberContainer>
-            <LotteryBetNumberContent>
-              <LotteryBetNumber>01</LotteryBetNumber>
-            </LotteryBetNumberContent>
-          </LotteryBetNumberContainer>
-
+          {gameSelected && <LotteryBetNumbers range={gameSelected.range} />}
           <LotteryBetActionButtonContainer>
             <TouchableOpacity activeOpacity={0.4} style={{ width: "48%" }}>
               <LotteryBetActionButton>
@@ -80,7 +95,6 @@ const LotteryBetScreen = () => {
                 </LotteryBetActionButtonText>
               </LotteryBetActionButton>
             </TouchableOpacity>
-
             <TouchableOpacity activeOpacity={0.4} style={{ width: "48%" }}>
               <LotteryBetActionButton>
                 <LotteryBetActionButtonText>
@@ -89,7 +103,6 @@ const LotteryBetScreen = () => {
               </LotteryBetActionButton>
             </TouchableOpacity>
           </LotteryBetActionButtonContainer>
-
           <TouchableOpacity activeOpacity={0.8}>
             <LotteryBetBtnAddToCart>
               <AntDesign name="shoppingcart" size={22} color="white" />

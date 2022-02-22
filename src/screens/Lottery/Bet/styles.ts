@@ -16,12 +16,14 @@ export const LotteryBetTitleContainer = styled.View`
 `;
 
 export const LotteryBetTitleText = styled.Text`
+  text-transform: uppercase;
   font-family: "helvetica-neue-italic";
   font-size: 18px;
   color: #707070;
 `;
 
 export const LotteryBetTitleTextBold = styled(LotteryBetTitleText)`
+  text-transform: none;
   font-family: "helvetica-neue-bold-italic";
   margin-right: 5px;
 `;
@@ -40,25 +42,6 @@ export const LotteryBetDescriptionContainer = styled.View`
 
 export const LotteryBetDescription = styled(LotteryBetText)`
   font-family: "helvetica-neue-italic";
-`;
-
-export const LotteryBetNumberContainer = styled.View`
-  flex-direction: row;
-  flex-wrap: wrap;
-`;
-
-export const LotteryBetNumberContent = styled.View`
-  background: #adc0c4;
-  height: 50px;
-  width: 50px;
-  border-radius: 50px;
-  justify-content: center;
-  align-items: center;
-  margin: 7px;
-`;
-
-export const LotteryBetNumber = styled.Text`
-  color: white;
 `;
 
 export const LotteryBetActionButtonContainer = styled.View`
@@ -90,26 +73,4 @@ export const LotteryBetBtnAddToCart = styled(LotteryBetActionButton)`
 export const LotteryBetBtnAddToCartText = styled.Text`
   margin-left: 10px;
   color: white;
-`;
-
-export const LotteryBetFilterContainer = styled.View`
-  flex-direction: row;
-  justify-content: space-between;
-  flex-wrap: wrap;
-`;
-
-export const LotteryBetFilterBtn = styled.View`
-  width: 30%;
-  padding: 0 10px;
-  margin-top: 10px;
-  background-color: white;
-  border: 1px solid ${Colors.primary};
-  border-radius: 30px;
-  height: 40px;
-  align-items: center;
-  justify-content: center;
-`;
-
-export const LotteryBetFilterBtnText = styled.Text`
-  color: ${Colors.primary};
 `;

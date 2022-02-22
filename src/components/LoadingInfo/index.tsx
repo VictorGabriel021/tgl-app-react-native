@@ -4,10 +4,14 @@ import { LoadingContainer } from "./styles";
 
 import { Colors } from "@constants/index";
 
-const LoadingInfo = () => {
+type Props = {
+  size?: number | "small" | "large" | undefined;
+};
+
+const LoadingInfo = ({ size = "small" }: Props) => {
   return (
     <LoadingContainer>
-      <ActivityIndicator size="small" color={Colors.secondary} />
+      <ActivityIndicator size={size} color={Colors.secondary} />
     </LoadingContainer>
   );
 };
