@@ -1,4 +1,6 @@
+import { RootState } from "@store/store";
 import { ScrollView, View } from "react-native";
+import { useSelector } from "react-redux";
 
 import {
   LotteryBetNumberContainer,
@@ -11,6 +13,10 @@ type Props = {
 };
 
 const LotteryBetNumbers = ({ range }: Props) => {
+  const { numbers: selectedNumbers } = useSelector(
+    (state: RootState) => state.bet
+  );
+
   let number: any = 1;
   let numbersList = [];
   while (number <= range) {
@@ -27,7 +33,10 @@ const LotteryBetNumbers = ({ range }: Props) => {
         <LotteryBetNumberContainer>
           {numbersList.map((num) => {
             return (
-              <LotteryBetNumberContent key={num}>
+              <LotteryBetNumberContent
+                key={num}
+                active={selectedNumbers.includes(+num)}
+              >
                 <LotteryBetNumber>{num}</LotteryBetNumber>
               </LotteryBetNumberContent>
             );

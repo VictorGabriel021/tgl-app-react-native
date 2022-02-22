@@ -1,4 +1,4 @@
-import { ScrollView, TouchableOpacity } from "react-native";
+import { ScrollView } from "react-native";
 
 import { useEffect, useState } from "react";
 
@@ -12,14 +12,7 @@ import {
   LotteryBetText,
   LotteryBetDescriptionContainer,
   LotteryBetDescription,
-  LotteryBetActionButtonContainer,
-  LotteryBetActionButton,
-  LotteryBetActionButtonText,
-  LotteryBetBtnAddToCart,
-  LotteryBetBtnAddToCartText,
 } from "./styles";
-
-import { AntDesign } from "@expo/vector-icons";
 
 import { IGame, IGamesResponse } from "@shared/interfaces";
 
@@ -32,7 +25,15 @@ import LotteryBetNumbers from "./Numbers";
 import ErrorMessage from "@components/ErrorMessage";
 import LoadingInfo from "@components/LoadingInfo";
 
+import ActionsButtons from "./ActionsButtons";
+
+import { clearGame } from "@store/betSlice";
+
+import { useDispatch } from "react-redux";
+
 const LotteryBetScreen = () => {
+  const dispatch = useDispatch();
+
   const { listGames } = games();
 
   const [gamesList, setGamesList] = useState<IGamesResponse>();
@@ -40,7 +41,10 @@ const LotteryBetScreen = () => {
   const [isLoading, setIsloading] = useState(false);
 
   const selectFilterHandler = (game: IGame) => {
-    setGameSelected(game);
+    if (gameSelected !== game) {
+      dispatch(clearGame());
+      setGameSelected(game);
+    }
   };
 
   useEffect(() => {
@@ -87,37 +91,10 @@ const LotteryBetScreen = () => {
             </LotteryBetDescription>
           </LotteryBetDescriptionContainer>
           {gameSelected && <LotteryBetNumbers range={gameSelected.range} />}
-          <LotteryBetActionButtonContainer>
-            <TouchableOpacity activeOpacity={0.4} style={{ width: "48%" }}>
-              <LotteryBetActionButton>
-                <LotteryBetActionButtonText>
-                  Complete game
-                </LotteryBetActionButtonText>
-              </LotteryBetActionButton>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={0.4} style={{ width: "48%" }}>
-              <LotteryBetActionButton>
-                <LotteryBetActionButtonText>
-                  Clear game
-                </LotteryBetActionButtonText>
-              </LotteryBetActionButton>
-            </TouchableOpacity>
-          </LotteryBetActionButtonContainer>
-          <TouchableOpacity activeOpacity={0.8}>
-            <LotteryBetBtnAddToCart>
-              <AntDesign name="shoppingcart" size={22} color="white" />
-              <LotteryBetBtnAddToCartText>
-                Add to cart
-              </LotteryBetBtnAddToCartText>
-            </LotteryBetBtnAddToCart>
-          </TouchableOpacity>
-          <TouchableOpacity activeOpacity={0.8}>
-            <LotteryBetBtnAddToCart>
-              <LotteryBetBtnAddToCartText>
-                Go to cart
-              </LotteryBetBtnAddToCartText>
-            </LotteryBetBtnAddToCart>
-          </TouchableOpacity>
+          <ActionsButtons
+            range={gameSelected.range}
+            maxNumber={gameSelected.max_number}
+          />
         </LotteryBetContainer>
       </ScrollView>
     </LotteryBetContainerScroll>
