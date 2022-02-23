@@ -1,8 +1,8 @@
 import Toast from "react-native-tiny-toast";
 
-export const toastShowSuccess = (message: string) => {
+export const toastShowSuccess = (message: string, positionTop?: boolean) => {
   Toast.showSuccess(message, {
-    position: Toast.position.BOTTOM,
+    position: positionTop ? Toast.position.TOP : Toast.position.BOTTOM,
     containerStyle: { backgroundColor: "green" },
     textStyle: { color: "white", fontSize: 16 },
     imgStyle: { tintColor: "white", height: 35, width: 35 },

@@ -12,10 +12,20 @@ export const cartSlice = createSlice({
       state.games.push(action.payload.betItem);
       state.totalCart += action.payload.price;
     },
-    removeFromCart: (state, action) => {},
+    removeFromCart: (state, action) => {
+      const index = state.games.findIndex(
+        (item) => item.id === action.payload.id
+      );
+      state.games.splice(index, 1);
+      state.totalCart -= action.payload.price;
+    },
+    clearCart: (state) => {
+      state.games = [];
+      state.totalCart = 0;
+    },
   },
 });
 
-export const { addToCart, removeFromCart } = cartSlice.actions;
+export const { addToCart, removeFromCart, clearCart } = cartSlice.actions;
 
 export default cartSlice.reducer;

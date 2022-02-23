@@ -40,7 +40,7 @@ const ActionsButtons = ({ gameSelected, range, maxNumber }: Props) => {
     dispatch(clearGame());
   };
 
-  const { id: gameId, price, color, type } = gameSelected;
+  const { id: game_id, price, color, type } = gameSelected;
 
   const addToCartHandler = () => {
     if (numbers.length < maxNumber) {
@@ -54,7 +54,7 @@ const ActionsButtons = ({ gameSelected, range, maxNumber }: Props) => {
 
     const betItem = {
       id: Math.random(),
-      gameId,
+      game_id,
       numbers: [...numbers].sort((x: number, y: number) => x - y),
       gameType: {
         type,
@@ -69,7 +69,7 @@ const ActionsButtons = ({ gameSelected, range, maxNumber }: Props) => {
     }
     dispatch(addToCart({ betItem, price }));
     clearGameHandler();
-    toastShowSuccess("The bet has been added to the cart");
+    toastShowSuccess("The bet has been added to the cart", true);
   };
 
   return (

@@ -78,3 +78,17 @@ export const SaveText = styled.Text`
   font-family: "helvetica-neue-bold-italic";
   margin-right: 5px;
 `;
+
+export const ErrorContainer = styled.View`
+  background-color: #f1baba;
+  height: 60px;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  margin: 20px 0;
+`;
+
+export const ErrorText = styled.Text`
+  color: red;
+  font-size: 16px;
+`;

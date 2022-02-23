@@ -22,12 +22,13 @@ import LotteryBetFilter from "./Filter";
 
 import LotteryBetNumbers from "./Numbers";
 
+import ActionsButtons from "./ActionsButtons";
+
 import ErrorMessage from "@components/ErrorMessage";
 import LoadingInfo from "@components/LoadingInfo";
 
-import ActionsButtons from "./ActionsButtons";
-
 import { clearGame } from "@store/betSlice";
+import { saveFilterInfo } from "@store/filterSlice";
 
 import { useDispatch } from "react-redux";
 
@@ -54,6 +55,7 @@ const LotteryBetScreen = () => {
         const response: any = await listGames();
         setGamesList(response.data);
         setGameSelected(response.data.types[0]);
+        dispatch(saveFilterInfo(response.data));
       } catch (error) {}
       setIsloading(false);
     };
@@ -86,7 +88,7 @@ const LotteryBetScreen = () => {
           />
 
           <LotteryBetDescriptionContainer>
-            <View style={{marginVertical: 10}}>
+            <View style={{ marginVertical: 10 }}>
               <LotteryBetText>Game Price</LotteryBetText>
               <LotteryBetDescription>
                 R$ {gameSelected.price.toFixed(2)}

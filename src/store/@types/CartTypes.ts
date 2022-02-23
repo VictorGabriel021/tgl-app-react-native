@@ -5,7 +5,7 @@ export type Cart = {
 
 export type BetGame = {
   id: number;
-  gameId: number;
+  game_id: number;
   numbers: number[];
   gameType: {
     type: string;
