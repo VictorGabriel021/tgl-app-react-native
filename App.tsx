@@ -1,4 +1,4 @@
-import 'react-native-gesture-handler';
+import "react-native-gesture-handler";
 
 import { useState } from "react";
 
@@ -10,6 +10,10 @@ import Navigation from "@navigation/NavigatorContainer";
 import { Provider } from "react-redux";
 
 import { store } from "@store/store";
+
+import { enableScreens } from "react-native-screens";
+
+enableScreens(true);
 
 const fetchFonts = () => {
   return Font.loadAsync({

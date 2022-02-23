@@ -1,6 +1,9 @@
+import { ScrollView, TouchableOpacity, View } from "react-native";
+
+import { useDispatch, useSelector } from "react-redux";
+
+import { addAndRemoveNumberManually } from "@store/betSlice";
 import { RootState } from "@store/store";
-import { ScrollView, View } from "react-native";
-import { useSelector } from "react-redux";
 
 import {
   LotteryBetNumberContainer,
@@ -8,37 +11,58 @@ import {
   LotteryBetNumber,
 } from "./styles";
 
+import { toastShowWarning } from "@helpers/toastInfo";
+
 type Props = {
   range: number;
+  maxNumber: number;
 };
 
-const LotteryBetNumbers = ({ range }: Props) => {
+const LotteryBetNumbers = ({ range, maxNumber }: Props) => {
   const { numbers: selectedNumbers } = useSelector(
     (state: RootState) => state.bet
   );
 
+  const dispatch = useDispatch();
+
   let number: any = 1;
   let numbersList = [];
+
   while (number <= range) {
-    if (number < 10) {
-      number = "0" + number;
-    }
     numbersList.push(number);
     number++;
   }
 
+  const selectNumberHandler = (num: number) => {
+    if (
+      selectedNumbers.length < maxNumber ||
+      (selectedNumbers.length === maxNumber && selectedNumbers.includes(num))
+    ) {
+      dispatch(addAndRemoveNumberManually(num));
+    } else {
+      toastShowWarning(`You've selected ${maxNumber} numbers!`);
+    }
+  };
+
   return (
-    <View style={{ height: 250 }}>
+    <View style={{ height: 250, marginVertical: 15 }}>
       <ScrollView nestedScrollEnabled>
         <LotteryBetNumberContainer>
           {numbersList.map((num) => {
+            let number = num;
+            if (num < 10) {
+              number = "0" + num;
+            }
             return (
-              <LotteryBetNumberContent
+              <TouchableOpacity
                 key={num}
-                active={selectedNumbers.includes(+num)}
+                activeOpacity={0.5}
+                onPress={selectNumberHandler.bind(null, num)}
               >
-                <LotteryBetNumber>{num}</LotteryBetNumber>
-              </LotteryBetNumberContent>
+                <LotteryBetNumberContent active={selectedNumbers.includes(num)}>
+                  <LotteryBetNumber>{number}</LotteryBetNumber>
+                </LotteryBetNumberContent>
+              </TouchableOpacity>
             );
           })}
         </LotteryBetNumberContainer>

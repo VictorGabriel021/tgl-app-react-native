@@ -1,4 +1,4 @@
-import { ScrollView } from "react-native";
+import { ScrollView, View } from "react-native";
 
 import { useEffect, useState } from "react";
 
@@ -74,7 +74,7 @@ const LotteryBetScreen = () => {
         <LotteryBetContainer>
           <LotteryBetTitleContainer>
             <LotteryBetTitleTextBold>NEW BET</LotteryBetTitleTextBold>
-            <LotteryBetTitleText>FOR {gameSelected?.type}</LotteryBetTitleText>
+            <LotteryBetTitleText>FOR {gameSelected.type}</LotteryBetTitleText>
           </LotteryBetTitleContainer>
           <LotteryBetChooseGame>
             <LotteryBetText>Choose a game</LotteryBetText>
@@ -84,14 +84,28 @@ const LotteryBetScreen = () => {
             gameSelected={gameSelected}
             selectFilterHandler={selectFilterHandler}
           />
+
           <LotteryBetDescriptionContainer>
+            <View style={{marginVertical: 10}}>
+              <LotteryBetText>Game Price</LotteryBetText>
+              <LotteryBetDescription>
+                R$ {gameSelected.price.toFixed(2)}
+              </LotteryBetDescription>
+            </View>
+
             <LotteryBetText>Fill your bet</LotteryBetText>
             <LotteryBetDescription>
-              {gameSelected?.description}
+              {gameSelected.description}
             </LotteryBetDescription>
           </LotteryBetDescriptionContainer>
-          {gameSelected && <LotteryBetNumbers range={gameSelected.range} />}
+          {gameSelected && (
+            <LotteryBetNumbers
+              range={gameSelected.range}
+              maxNumber={gameSelected.max_number}
+            />
+          )}
           <ActionsButtons
+            gameSelected={gameSelected}
             range={gameSelected.range}
             maxNumber={gameSelected.max_number}
           />

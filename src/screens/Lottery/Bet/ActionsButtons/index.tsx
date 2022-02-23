@@ -1,5 +1,7 @@
 import { TouchableOpacity } from "react-native";
 
+import { useDispatch, useSelector } from "react-redux";
+
 import {
   LotteryBetActionButton,
   LotteryBetActionButtonContainer,
@@ -10,16 +12,24 @@ import {
 
 import { AntDesign } from "@expo/vector-icons";
 
+import { toastShowWarning, toastShowSuccess } from "@helpers/toastInfo";
+import { isEqualBet } from "@helpers/bet";
+
+import { RootState } from "@store/store";
+import { addToCart } from "@store/cartSlice";
 import { completeGame, clearGame } from "@store/betSlice";
 
-import { useDispatch } from "react-redux";
+import { IGame } from "@shared/interfaces";
 
 type Props = {
+  gameSelected: IGame;
   range: number;
   maxNumber: number;
 };
 
-const ActionsButtons = ({ range, maxNumber }: Props) => {
+const ActionsButtons = ({ gameSelected, range, maxNumber }: Props) => {
+  const { numbers } = useSelector((state: RootState) => state.bet);
+  const { games } = useSelector((state: RootState) => state.cart);
   const dispatch = useDispatch();
 
   const completeGameHandler = () => {
@@ -28,6 +38,38 @@ const ActionsButtons = ({ range, maxNumber }: Props) => {
 
   const clearGameHandler = () => {
     dispatch(clearGame());
+  };
+
+  const { id: gameId, price, color, type } = gameSelected;
+
+  const addToCartHandler = () => {
+    if (numbers.length < maxNumber) {
+      let missingNumber: any = maxNumber - numbers.length;
+      let oneNumber = "1 more number";
+      let moreNumber = `${missingNumber} more numbers`;
+      missingNumber = missingNumber === 1 ? oneNumber : moreNumber;
+      toastShowWarning(`It's necessary to select ${missingNumber}`);
+      return;
+    }
+
+    const betItem = {
+      id: Math.random(),
+      gameId,
+      numbers: [...numbers].sort((x: number, y: number) => x - y),
+      gameType: {
+        type,
+        price,
+        color,
+      },
+    };
+
+    if (isEqualBet(games, betItem)) {
+      toastShowWarning("Can't add the same bet");
+      return;
+    }
+    dispatch(addToCart({ betItem, price }));
+    clearGameHandler();
+    toastShowSuccess("The bet has been added to the cart");
   };
 
   return (
@@ -54,13 +96,13 @@ const ActionsButtons = ({ range, maxNumber }: Props) => {
           </LotteryBetActionButton>
         </TouchableOpacity>
       </LotteryBetActionButtonContainer>
-      <TouchableOpacity activeOpacity={0.8}>
+      <TouchableOpacity activeOpacity={0.8} onPress={addToCartHandler}>
         <LotteryBetBtnAddToCart>
           <AntDesign name="shoppingcart" size={22} color="white" />
           <LotteryBetBtnAddToCartText>Add to cart</LotteryBetBtnAddToCartText>
         </LotteryBetBtnAddToCart>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.8}>
+      <TouchableOpacity activeOpacity={0.8} onPress={() => {}}>
         <LotteryBetBtnAddToCart>
           <LotteryBetBtnAddToCartText>Go to cart</LotteryBetBtnAddToCartText>
         </LotteryBetBtnAddToCart>

@@ -8,7 +8,13 @@ export const betSlice = createSlice({
   name: "bet",
   initialState: initialStateListNumbers,
   reducers: {
-    addAndRemoveNumberManually: (state) => {},
+    addAndRemoveNumberManually: (state, action) => {
+      if (state.numbers.includes(action.payload)) {
+        state.numbers.splice(state.numbers.indexOf(action.payload), 1);
+      } else {
+        state.numbers.push(action.payload);
+      }
+    },
     completeGame: (state, action) => {
       while (state.numbers.length < action.payload.maxNumber) {
         const generateNumber = Math.ceil(Math.random() * action.payload.range);

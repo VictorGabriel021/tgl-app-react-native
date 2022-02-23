@@ -35,7 +35,7 @@ export const LotteryBetText = styled(LotteryBetTitleTextBold)`
 `;
 
 export const LotteryBetDescriptionContainer = styled.View`
-  margin: 15px 0;
+  margin: 10px 0;
 `;
 
 export const LotteryBetDescription = styled(LotteryBetText)`

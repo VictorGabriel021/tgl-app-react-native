@@ -32,6 +32,7 @@ import { logout } from "@store/authSlice";
 import {
   LotteryListScreen,
   LotteryBetScreen,
+  LotteryCartScreen,
   UserProfileScreen,
 } from "@screens/index";
 
@@ -109,6 +110,7 @@ const DrawerNavigator = () => {
         }}
       />
       <DrawerNav.Screen name="LotteryBet" component={LotteryBetScreen} />
+      <DrawerNav.Screen name="LotteryCart" component={LotteryCartScreen} />
       <DrawerNav.Screen
         name="User"
         component={UserProfileScreen}
