@@ -11,4 +11,5 @@ export type DrawerParamList = {
   LotteryBet: undefined;
   LotteryCart: undefined;
   User: undefined;
+  UserEdit: undefined;
 };

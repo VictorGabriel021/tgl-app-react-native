@@ -45,3 +45,19 @@ export interface IUserProfileResponse {
   bets: BetType[];
   picture?: any;
 }
+
+export interface IBodyEdit {
+  name: string;
+  email: string;
+}
+
+export interface IUserEditResponse {
+  id: number;
+  email: string;
+  is_admin: number;
+  name: string;
+  token?: any;
+  token_created_at?: any;
+  created_at: string;
+  updated_at: string;
+}

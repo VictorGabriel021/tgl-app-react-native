@@ -34,6 +34,7 @@ import {
   LotteryBetScreen,
   LotteryCartScreen,
   UserProfileScreen,
+  UserEditScreen,
 } from "@screens/index";
 
 const screenOptionsDefault = {
@@ -111,6 +112,7 @@ const DrawerNavigator = () => {
       />
       <DrawerNav.Screen name="LotteryBet" component={LotteryBetScreen} />
       <DrawerNav.Screen name="LotteryCart" component={LotteryCartScreen} />
+      <DrawerNav.Screen name="UserEdit" component={UserEditScreen} />
       <DrawerNav.Screen
         name="User"
         component={UserProfileScreen}

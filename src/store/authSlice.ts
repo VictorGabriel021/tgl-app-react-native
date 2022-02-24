@@ -28,9 +28,13 @@ export const authSlice = createSlice({
       state.didTryAutoLogin = true;
       AsyncStorage.removeItem("userData");
     },
+    updateUser: (state, action) => {
+      state.user = action.payload;
+    },
   },
 });
 
-export const { login, logout, setDidTryAutoLogin } = authSlice.actions;
+export const { login, logout, setDidTryAutoLogin, updateUser } =
+  authSlice.actions;
 
 export default authSlice.reducer;

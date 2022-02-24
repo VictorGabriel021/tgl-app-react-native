@@ -10,7 +10,9 @@ export type {
 export type {
   IBodyRegister,
   ICreateUserResponse,
+  IBodyEdit,
   IUserProfileResponse,
+  IUserEditResponse,
 } from "./UserInterfaces";
 
 export type { IGame, IGamesResponse } from "./GamesInterfaces";

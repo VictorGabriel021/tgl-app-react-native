@@ -6,12 +6,13 @@ import { Colors } from "@constants/index";
 
 type Props = {
   size?: number | "small" | "large" | undefined;
+  color?: string;
 };
 
-const LoadingInfo = ({ size = "small" }: Props) => {
+const LoadingInfo = ({ size = "small", color }: Props) => {
   return (
     <LoadingContainer>
-      <ActivityIndicator size={size} color={Colors.secondary} />
+      <ActivityIndicator size={size} color={color ? color : Colors.secondary} />
     </LoadingContainer>
   );
 };

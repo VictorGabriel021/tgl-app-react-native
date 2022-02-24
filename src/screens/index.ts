@@ -1,4 +1,4 @@
-import { UserProfileScreen } from "@screens/User";
+import { UserProfileScreen, UserEditScreen } from "@screens/User";
 import {
   LotteryListScreen,
   LotteryBetScreen,
@@ -7,6 +7,7 @@ import {
 
 export {
   UserProfileScreen,
+  UserEditScreen,
   LotteryListScreen,
   LotteryBetScreen,
   LotteryCartScreen,

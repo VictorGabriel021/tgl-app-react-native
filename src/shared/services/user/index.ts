@@ -4,6 +4,8 @@ import {
   IUserProfileResponse,
   IBodyRegister,
   ICreateUserResponse,
+  IBodyEdit,
+  IUserEditResponse,
 } from "@shared/interfaces";
 
 import { IRegister } from "./interfaces";
@@ -13,11 +15,15 @@ const user = (): IRegister => {
     return instance.post("/user/create", body);
   }
 
+  async function updateMyUser(body: IBodyEdit): Promise<IUserEditResponse> {
+    return instance.put("/user/update", body);
+  }
+
   async function myAccount(): Promise<IUserProfileResponse[]> {
     return instance.get("/user/my-account");
   }
 
-  return { createUser, myAccount };
+  return { createUser, updateMyUser, myAccount };
 };
 
 export default user;
