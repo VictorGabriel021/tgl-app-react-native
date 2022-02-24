@@ -83,7 +83,7 @@ const LotteryBetScreen = () => {
           </LotteryBetChooseGame>
           <LotteryBetFilter
             gamesList={gamesList}
-            gameSelected={gameSelected}
+            gameSelected={[gameSelected.type]}
             selectFilterHandler={selectFilterHandler}
           />
 

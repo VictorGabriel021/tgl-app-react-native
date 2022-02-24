@@ -1,9 +1,13 @@
 import { ErrorContainer, ErrorText } from "./styles";
 
-const ErrorMessage = () => {
+type Props = {
+  message?: string;
+};
+
+const ErrorMessage = ({ message }: Props) => {
   return (
     <ErrorContainer>
-      <ErrorText>Error loading data!</ErrorText>
+      <ErrorText>{message ? message : "Error loading data!"}</ErrorText>
     </ErrorContainer>
   );
 };

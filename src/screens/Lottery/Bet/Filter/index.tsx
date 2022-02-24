@@ -10,7 +10,7 @@ import { IGame, IGamesResponse } from "@shared/interfaces";
 
 type Props = {
   gamesList: IGamesResponse;
-  gameSelected: IGame;
+  gameSelected: string[];
   selectFilterHandler: (game: IGame) => void;
 };
 
@@ -20,29 +20,27 @@ const LotteryBetFilter = ({
   selectFilterHandler,
 }: Props) => {
   return (
-    <ScrollView>
-      <LotteryBetFilterContainer>
-        {gamesList.types.map((game) => {
-          return (
-            <LotteryBetFilterBtn
-              key={game.id}
-              activeOpacity={0.5}
-              onPress={selectFilterHandler.bind(null, game)}
+    <LotteryBetFilterContainer>
+      {gamesList.types.map((game) => {
+        return (
+          <LotteryBetFilterBtn
+            key={game.id}
+            activeOpacity={0.5}
+            onPress={selectFilterHandler.bind(null, game)}
+            color={game.color}
+            active={gameSelected.includes(game.type)}
+          >
+            <LotteryBetFilterBtnText
               color={game.color}
-              active={gameSelected?.id === game.id}
+              active={gameSelected.includes(game.type)}
+              numberOfLines={2}
             >
-              <LotteryBetFilterBtnText
-                color={game.color}
-                active={gameSelected?.id === game.id}
-                numberOfLines={2}
-              >
-                {game.type}
-              </LotteryBetFilterBtnText>
-            </LotteryBetFilterBtn>
-          );
-        })}
-      </LotteryBetFilterContainer>
-    </ScrollView>
+              {game.type}
+            </LotteryBetFilterBtnText>
+          </LotteryBetFilterBtn>
+        );
+      })}
+    </LotteryBetFilterContainer>
   );
 };
 

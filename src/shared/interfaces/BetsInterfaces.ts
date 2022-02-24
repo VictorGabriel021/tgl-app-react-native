@@ -20,3 +20,18 @@ export interface IBet {
 export interface IBetResponse {
   bet: IBet[];
 }
+
+interface Type {
+  id: number;
+  type: string;
+}
+
+export interface IBetListResponse {
+  id: number;
+  user_id: number;
+  game_id: number;
+  choosen_numbers: string;
+  price: number;
+  created_at: Date;
+  type: Type;
+}
