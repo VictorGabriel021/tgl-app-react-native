@@ -1,4 +1,8 @@
-import { IBodyRegister, ICreateUserResponse } from "@shared/interfaces";
+import {
+  IBodyRegister,
+  ICreateUserResponse,
+  IUserProfileResponse,
+} from "@shared/interfaces";
 
 export interface IRegister {
   createUser: ({
@@ -6,4 +10,6 @@ export interface IRegister {
     email,
     password,
   }: IBodyRegister) => Promise<ICreateUserResponse>;
+
+  myAccount: () => Promise<IUserProfileResponse[]>;
 }

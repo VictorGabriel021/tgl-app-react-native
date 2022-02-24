@@ -1,6 +1,10 @@
 import instance from "../axios.config";
 
-import { IBodyRegister, ICreateUserResponse } from "@shared/interfaces";
+import {
+  IUserProfileResponse,
+  IBodyRegister,
+  ICreateUserResponse,
+} from "@shared/interfaces";
 
 import { IRegister } from "./interfaces";
 
@@ -9,7 +13,11 @@ const user = (): IRegister => {
     return instance.post("/user/create", body);
   }
 
-  return { createUser };
+  async function myAccount(): Promise<IUserProfileResponse[]> {
+    return instance.get("/user/my-account");
+  }
+
+  return { createUser, myAccount };
 };
 
 export default user;

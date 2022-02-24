@@ -1,5 +1,7 @@
 import "react-native-gesture-handler";
 
+import { SafeAreaView } from "react-native-safe-area-context";
+
 import { useState } from "react";
 
 import * as Font from "expo-font";
@@ -39,8 +41,10 @@ export default function App() {
     );
   }
   return (
-    <Provider store={store}>
-      <Navigation />
-    </Provider>
+    <SafeAreaView style={{ flex: 1 }}>
+      <Provider store={store}>
+        <Navigation />
+      </Provider>
+    </SafeAreaView>
   );
 }
