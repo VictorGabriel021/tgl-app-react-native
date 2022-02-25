@@ -12,8 +12,7 @@ import {
 
 import { AntDesign } from "@expo/vector-icons";
 
-import { toastShowWarning, toastShowSuccess } from "@helpers/toastInfo";
-import { isEqualBet } from "@helpers/bet";
+import { toastShowWarning, toastShowSuccess, isEqualBet } from "@helpers/index";
 
 import { RootState } from "@store/store";
 import { addToCart } from "@store/cartSlice";
@@ -45,10 +44,11 @@ const ActionsButtons = ({ gameSelected, range, maxNumber }: Props) => {
   const addToCartHandler = () => {
     if (numbers.length < maxNumber) {
       let missingNumber: any = maxNumber - numbers.length;
-      let oneNumber = "1 more number";
-      let moreNumber = `${missingNumber} more numbers`;
-      missingNumber = missingNumber === 1 ? oneNumber : moreNumber;
-      toastShowWarning(`It's necessary to select ${missingNumber}`);
+      missingNumber =
+        missingNumber === 1
+          ? missingNumber + " número"
+          : missingNumber + " números";
+      toastShowWarning(`É necessário selecionar mais ${missingNumber}`);
       return;
     }
 
@@ -64,12 +64,12 @@ const ActionsButtons = ({ gameSelected, range, maxNumber }: Props) => {
     };
 
     if (isEqualBet(games, betItem)) {
-      toastShowWarning("Can't add the same bet");
+      toastShowWarning("Não é possível adicionar o mesmo jogo de loteria!");
       return;
     }
     dispatch(addToCart({ betItem, price }));
     clearGameHandler();
-    toastShowSuccess("The bet has been added to the cart", true);
+    toastShowSuccess("A aposta foi adicionada no carrinho!", true);
   };
 
   return (

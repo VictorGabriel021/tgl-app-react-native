@@ -1,6 +1,11 @@
 import { getUserData, isAuthenticated } from "./auth";
 import { emailValidation } from "./formValidation";
-import { toastShowSuccess, toastShowError } from ".//toastInfo";
+import { isEqualBet } from "./bet";
+import {
+  toastShowSuccess,
+  toastShowError,
+  toastShowWarning,
+} from "./toastInfo";
 
 export {
   getUserData,
@@ -8,4 +13,6 @@ export {
   emailValidation,
   toastShowSuccess,
   toastShowError,
+  toastShowWarning,
+  isEqualBet,
 };

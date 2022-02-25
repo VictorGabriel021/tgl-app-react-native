@@ -24,8 +24,7 @@ import LotteryBetNumbers from "./Numbers";
 
 import ActionsButtons from "./ActionsButtons";
 
-import ErrorMessage from "@components/ErrorMessage";
-import LoadingInfo from "@components/LoadingInfo";
+import { ErrorMessage, LoadingInfo } from "@components/index";
 
 import { clearGame } from "@store/betSlice";
 import { saveFilterInfo } from "@store/filterSlice";
@@ -33,13 +32,12 @@ import { saveFilterInfo } from "@store/filterSlice";
 import { useDispatch } from "react-redux";
 
 const LotteryBetScreen = () => {
-  const dispatch = useDispatch();
-
-  const { listGames } = games();
-
   const [gamesList, setGamesList] = useState<IGamesResponse>();
   const [gameSelected, setGameSelected] = useState<IGame>();
   const [isLoading, setIsloading] = useState(false);
+
+  const dispatch = useDispatch();
+  const { listGames } = games();
 
   const selectFilterHandler = (game: IGame) => {
     if (gameSelected !== game) {
@@ -57,6 +55,7 @@ const LotteryBetScreen = () => {
         setGameSelected(response.data.types[0]);
         dispatch(saveFilterInfo(response.data));
       } catch (error) {}
+      await dispatch(clearGame());
       setIsloading(false);
     };
     getGamesData();

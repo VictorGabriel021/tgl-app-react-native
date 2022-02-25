@@ -1,7 +1,5 @@
 import { Platform } from "react-native";
 
-import { Colors } from "@constants/index";
-
 import { UserParamList } from "@navigation/@types";
 
 import {
@@ -17,18 +15,13 @@ import CustomHeaderButton from "@components/UI/HeaderButton";
 
 import { UserProfileScreen, UserEditScreen } from "@screens/User";
 
-const screenOptionsDefault = {
-  headerStyle: {
-    backgroundColor: Platform.OS === "android" ? Colors.primary : "",
-  },
-  headerTintColor: Platform.OS === "android" ? "white" : Colors.primary,
-};
+import { screenOptionsDefault } from "@navigation/helpers/screenOptions";
+
+type drawerScreenProp = StackNavigationProp<UserParamList, "UserProfile">;
 
 const UserNavigator = () => {
   const Stack = createStackNavigator<UserParamList>();
-
-  type drawerScreenProp = StackNavigationProp<UserParamList, "UserProfile">;
-  const navigationDrawer = useNavigation<drawerScreenProp>();
+  const navigation = useNavigation<drawerScreenProp>();
 
   return (
     <Stack.Navigator screenOptions={screenOptionsDefault}>
@@ -43,7 +36,7 @@ const UserNavigator = () => {
                 title="Menu"
                 iconName={Platform.OS === "android" ? "md-menu" : "ios-menu"}
                 onPress={() => {
-                  navigationDrawer.dispatch(DrawerActions.toggleDrawer());
+                  navigation.dispatch(DrawerActions.toggleDrawer());
                 }}
               />
             </HeaderButtons>
@@ -56,7 +49,7 @@ const UserNavigator = () => {
                   Platform.OS === "android" ? "md-create" : "ios-create"
                 }
                 onPress={() => {
-                  navigationDrawer.navigate("UserEdit");
+                  navigation.navigate("UserEdit");
                 }}
               />
             </HeaderButtons>

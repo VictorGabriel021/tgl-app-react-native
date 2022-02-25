@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { TouchableOpacity } from "react-native";
 
 import { useForm } from "react-hook-form";
@@ -50,7 +51,6 @@ const LoginScreen = () => {
   });
 
   const dispatch = useDispatch();
-
   const { loginUser } = auth();
 
   const navigation = useNavigation<rootScreenProp>();
@@ -62,7 +62,7 @@ const LoginScreen = () => {
       dispatch(login(response.data));
       reset(initialValuesForm);
     } catch (error: any) {
-      toastShowError("Invalid password or email!");
+      toastShowError("E-mail ou senha inválidos!");
     }
     setIsLoading(false);
   };

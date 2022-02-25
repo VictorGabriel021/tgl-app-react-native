@@ -7,7 +7,9 @@ type Props = {
 const ErrorMessage = ({ message }: Props) => {
   return (
     <ErrorContainer>
-      <ErrorText>{message ? message : "Error loading data!"}</ErrorText>
+      <ErrorText>
+        {message ? message : "Erro ao carregar as informações!"}
+      </ErrorText>
     </ErrorContainer>
   );
 };

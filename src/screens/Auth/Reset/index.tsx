@@ -51,7 +51,7 @@ const ResetScreen = () => {
         resetToken: response.data.token,
       });
     } catch (error: any) {
-      toastShowError("User not found in database!");
+      toastShowError("Usuário não encontrado em nossa base de dados!");
     }
     setIsLoading(false);
   };

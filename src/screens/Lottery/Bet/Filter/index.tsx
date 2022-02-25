@@ -1,5 +1,3 @@
-import { ScrollView } from "react-native";
-
 import {
   LotteryBetFilterContainer,
   LotteryBetFilterBtn,

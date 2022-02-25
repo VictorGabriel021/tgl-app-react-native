@@ -17,7 +17,7 @@ export const ProfileImg = styled.Image`
   border-radius: 120px;
   margin: 10px 0;
   border-color: ${Colors.primary};
-  border-width: 7px;
+  border-width: 5px;
 `;
 
 export const ProfileInfo = styled.View`

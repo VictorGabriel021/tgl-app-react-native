@@ -72,9 +72,9 @@ const ChangePasswordScreen = () => {
       await changePassword(resetToken, { password });
       reset(initialValuesForm);
       navigation.replace("Login");
-      toastShowSuccess("Password successfully changed!");
+      toastShowSuccess("Senha alterada !");
     } catch (error: any) {
-      toastShowError("Error saving data!");
+      toastShowError("Erro ao salvar os dados!");
     }
     setIsLoading(false);
   };

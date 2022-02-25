@@ -1,4 +1,7 @@
 import { AuthCard, InputController, TextSubmitForm } from "./Auth";
+
 import LoadingInfo from "./LoadingInfo";
 
-export { AuthCard, InputController, TextSubmitForm, LoadingInfo };
+import ErrorMessage from "./ErrorMessage";
+
+export { AuthCard, InputController, TextSubmitForm, LoadingInfo, ErrorMessage };

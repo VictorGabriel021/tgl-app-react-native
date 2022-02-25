@@ -1,7 +1,5 @@
 import { Platform } from "react-native";
 
-import { Colors } from "@constants/index";
-
 import { HeaderButtons, Item } from "react-navigation-header-buttons";
 
 import { DrawerActions, useNavigation } from "@react-navigation/native";
@@ -21,18 +19,13 @@ import {
 
 import CustomHeaderButton from "@components/UI/HeaderButton";
 
-const screenOptionsDefault = {
-  headerStyle: {
-    backgroundColor: Platform.OS === "android" ? Colors.primary : "",
-  },
-  headerTintColor: Platform.OS === "android" ? "white" : Colors.primary,
-};
+import { screenOptionsDefault } from "@navigation/helpers/screenOptions";
+
+type drawerScreenProp = StackNavigationProp<LotteryParamList, "LotteryList">;
 
 const LotteryNavigator = () => {
   const Stack = createStackNavigator<LotteryParamList>();
-
-  type drawerScreenProp = StackNavigationProp<LotteryParamList, "LotteryList">;
-  const navigationDrawer = useNavigation<drawerScreenProp>();
+  const navigation = useNavigation<drawerScreenProp>();
 
   return (
     <Stack.Navigator screenOptions={screenOptionsDefault}>
@@ -47,7 +40,7 @@ const LotteryNavigator = () => {
                 title="Menu"
                 iconName={Platform.OS === "android" ? "md-menu" : "ios-menu"}
                 onPress={() => {
-                  navigationDrawer.dispatch(DrawerActions.toggleDrawer());
+                  navigation.dispatch(DrawerActions.toggleDrawer());
                 }}
               />
             </HeaderButtons>
@@ -58,7 +51,7 @@ const LotteryNavigator = () => {
                 title="New Bet"
                 iconName={Platform.OS === "android" ? "md-add" : "ios-add"}
                 onPress={() => {
-                  navigationDrawer.navigate("LotteryBet");
+                  navigation.navigate("LotteryBet");
                 }}
               />
             </HeaderButtons>
@@ -76,7 +69,7 @@ const LotteryNavigator = () => {
                 title="Cart"
                 iconName={Platform.OS === "android" ? "md-cart" : "ios-cart"}
                 onPress={() => {
-                  navigationDrawer.navigate("LotteryCart");
+                  navigation.navigate("LotteryCart");
                 }}
               />
             </HeaderButtons>

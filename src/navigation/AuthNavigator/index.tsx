@@ -1,7 +1,3 @@
-import { Platform } from "react-native";
-
-import { Colors } from "@constants/index";
-
 import { AuthParamList } from "@navigation/@types";
 
 import { createStackNavigator } from "@react-navigation/stack";
@@ -14,12 +10,7 @@ import {
   ChangePasswordScreen,
 } from "@screens/Auth";
 
-const screenOptionsDefault = {
-  headerStyle: {
-    backgroundColor: Platform.OS === "android" ? Colors.primary : "",
-  },
-  headerTintColor: Platform.OS === "android" ? "white" : Colors.primary,
-};
+import { screenOptionsDefault } from "@navigation/helpers/screenOptions";
 
 const AuthNavigator = () => {
   const Stack = createStackNavigator<AuthParamList>();

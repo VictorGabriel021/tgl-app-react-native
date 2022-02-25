@@ -1,4 +1,4 @@
-import { Button, Platform, SafeAreaView } from "react-native";
+import { Button, SafeAreaView } from "react-native";
 
 import { useDispatch } from "react-redux";
 
@@ -20,12 +20,7 @@ import { logout } from "@store/authSlice";
 import LotteryNavigator from "@navigation/LotteryNavigator";
 import UserNavigator from "@navigation/UserNavigator";
 
-const screenOptionsDefault = {
-  headerStyle: {
-    backgroundColor: Platform.OS === "android" ? Colors.primary : "",
-  },
-  headerTintColor: Platform.OS === "android" ? "white" : Colors.primary,
-};
+import { screenOptionsDefault } from "@navigation/helpers/screenOptions";
 
 const DrawerNav = createDrawerNavigator<DrawerParamList>();
 

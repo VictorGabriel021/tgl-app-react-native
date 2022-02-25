@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import { TouchableOpacity } from "react-native";
 
 import { useDispatch } from "react-redux";
@@ -69,10 +70,10 @@ const RegisterScreen = () => {
       dispatch(login(response.data));
       reset(initialValuesForm);
       setIsLoading(false);
-      toastShowSuccess("Successful registered user!");
+      toastShowSuccess("Usuário cadastrado com sucesso!");
     } catch (error: any) {
       setIsLoading(false);
-      toastShowError("This email is already registered in the system!");
+      toastShowError("Este e-mail já está registrado no sistema!");
     }
   };
 

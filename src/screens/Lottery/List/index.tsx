@@ -12,8 +12,7 @@ import { IGamesResponse, IGame, IBetListResponse } from "@shared/interfaces";
 
 import { bets, games } from "@shared/services";
 
-import LoadingInfo from "@components/LoadingInfo";
-import ErrorMessage from "@components/ErrorMessage";
+import { LoadingInfo, ErrorMessage } from "@components/index";
 
 import LotteryListItem from "./Item";
 
@@ -131,11 +130,14 @@ const LotteryListScreen = () => {
     );
   }
 
-  if (betList.length === 0 && gameSelectedList.length > 1) {
+  if (
+    (betList.length === 0 && gameSelectedList.length === 0) ||
+    gameSelectedList.length > 1
+  ) {
     content = (
       <>
         {header}
-        <ErrorMessage message={`Error loading bets`} />
+        <ErrorMessage message="Não existem apostas para serem filtradas!" />
       </>
     );
   }
@@ -144,7 +146,7 @@ const LotteryListScreen = () => {
     content = (
       <>
         {header}
-        <ErrorMessage message={`Error loading ${gameSelectedList[0]} bets`} />
+        <ErrorMessage message="Não existem apostas registradas para esse jogo!" />
       </>
     );
   }

@@ -3,7 +3,7 @@ import axios, { AxiosError } from "axios";
 import { getToken } from "@helpers/auth";
 
 const instance = axios.create({
-  baseURL: "http://192.168.0.104:3333",
+  baseURL: "http://192.168.0.6:3333",
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
