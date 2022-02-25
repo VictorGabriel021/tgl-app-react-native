@@ -23,6 +23,12 @@ import { updateUser } from "@store/authSlice";
 
 import { user } from "@shared/services";
 
+import { StackNavigationProp } from "@react-navigation/stack";
+
+import { UserParamList } from "@navigation/@types";
+
+import { useNavigation } from "@react-navigation/native";
+
 interface IFormEdit {
   name: string;
   email: string;
@@ -41,6 +47,8 @@ const style = {
   elevation: 5,
 };
 
+type rootScreenProp = StackNavigationProp<UserParamList, "UserProfile">;
+
 const UserEditScreen = () => {
   const {
     control,
@@ -54,12 +62,15 @@ const UserEditScreen = () => {
   const dispatch = useDispatch();
   const { updateMyUser } = user();
 
+  const navigation = useNavigation<rootScreenProp>();
+
   const onSubmit = async (dataForm: IFormEdit) => {
     setIsLoading(true);
     try {
       const response: any = await updateMyUser(dataForm);
       dispatch(updateUser(response.data));
       setIsLoading(false);
+      navigation.navigate("UserProfile");
       toastShowSuccess("Usuário alterado com sucesso !");
     } catch (error: any) {}
     setIsLoading(false);
@@ -107,7 +118,7 @@ const UserEditScreen = () => {
       <TouchableOpacity activeOpacity={0.7} onPress={handleSubmit(onSubmit)}>
         <UserEditButton>
           {isLoading && <LoadingInfo color="white" />}
-          {!isLoading && <UserEditButtonText>Salvar</UserEditButtonText>}
+          {!isLoading && <UserEditButtonText>Save</UserEditButtonText>}
         </UserEditButton>
       </TouchableOpacity>
     </UserEditContainer>

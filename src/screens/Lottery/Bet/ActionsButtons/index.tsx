@@ -102,11 +102,6 @@ const ActionsButtons = ({ gameSelected, range, maxNumber }: Props) => {
           <LotteryBetBtnAddToCartText>Add to cart</LotteryBetBtnAddToCartText>
         </LotteryBetBtnAddToCart>
       </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.8} onPress={() => {}}>
-        <LotteryBetBtnAddToCart>
-          <LotteryBetBtnAddToCartText>Go to cart</LotteryBetBtnAddToCartText>
-        </LotteryBetBtnAddToCart>
-      </TouchableOpacity>
     </>
   );
 };

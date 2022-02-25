@@ -7,16 +7,17 @@ export const ProfileContainer = styled.View`
   justify-content: center;
   align-items: center;
   background-color: white;
-  margin: 25px;
+  margin: 20px;
   border-radius: 10px;
 `;
 
 export const ProfileImg = styled.Image`
-  height: 230px;
-  width: 230px;
-  border-radius: 230px;
-  margin-bottom: 20px;
-  border: 7px solid ${Colors.primary};
+  height: 120px;
+  width: 120px;
+  border-radius: 120px;
+  margin: 10px 0;
+  border-color: ${Colors.primary};
+  border-width: 7px;
 `;
 
 export const ProfileInfo = styled.View`
@@ -27,5 +28,4 @@ export const ProfileInfo = styled.View`
 export const ProfileText = styled.Text`
   color: #707070;
   font-size: 14px;
-  line-height: 22px;
 `;

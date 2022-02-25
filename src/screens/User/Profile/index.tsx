@@ -1,5 +1,3 @@
-import { Button } from "react-native";
-
 import {
   ProfileContainer,
   ProfileImg,
@@ -66,7 +64,6 @@ const UserProfileScreen = () => {
           Data de cadastro: {dateBrazil(new Date(userInfo.created_at))}
         </ProfileText>
       </ProfileInfo>
-      <Button title="Editar" onPress={() => {}} />
     </ProfileContainer>
   );
 };

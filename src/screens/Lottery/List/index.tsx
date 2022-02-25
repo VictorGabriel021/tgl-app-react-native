@@ -90,8 +90,19 @@ const LotteryListScreen = () => {
     return <ErrorMessage message="Error loading betting filter information" />;
   }
 
+  let header = (
+    <View style={{ marginBottom: 20 }}>
+      <LotteryBetFilter
+        gamesList={gamesList}
+        gameSelected={gameSelectedList}
+        selectFilterHandler={selectFilterHandler}
+      />
+    </View>
+  );
+
   let content = (
     <FlatList
+      ListHeaderComponent={header}
       removeClippedSubviews={true}
       maxToRenderPerBatch={5}
       initialNumToRender={5}
@@ -112,31 +123,33 @@ const LotteryListScreen = () => {
   );
 
   if (isLoadingBetList) {
-    content = <LoadingInfo size="large" />;
+    content = (
+      <>
+        {header}
+        <LoadingInfo size="large" />
+      </>
+    );
   }
 
   if (betList.length === 0 && gameSelectedList.length > 1) {
-    content = <ErrorMessage message={`Error loading bets`} />;
+    content = (
+      <>
+        {header}
+        <ErrorMessage message={`Error loading bets`} />
+      </>
+    );
   }
 
   if (betList.length === 0 && gameSelectedList.length === 1) {
     content = (
-      <ErrorMessage message={`Error loading ${gameSelectedList[0]} bets`} />
+      <>
+        {header}
+        <ErrorMessage message={`Error loading ${gameSelectedList[0]} bets`} />
+      </>
     );
   }
 
-  return (
-    <LoterryListItemContainer>
-      <View style={{ marginBottom: 20 }}>
-        <LotteryBetFilter
-          gamesList={gamesList}
-          gameSelected={gameSelectedList}
-          selectFilterHandler={selectFilterHandler}
-        />
-      </View>
-      {content}
-    </LoterryListItemContainer>
-  );
+  return <LoterryListItemContainer>{content}</LoterryListItemContainer>;
 };
 
 export default LotteryListScreen;

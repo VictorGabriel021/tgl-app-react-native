@@ -26,11 +26,7 @@ const AuthNavigator = () => {
 
   return (
     <Stack.Navigator screenOptions={screenOptionsDefault}>
-      <Stack.Screen
-        name="Home"
-        component={HomeScreen}
-        options={{ headerTitle: "TGL" }}
-      />
+      <Stack.Screen name="Home" component={HomeScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen name="Reset" component={ResetScreen} />

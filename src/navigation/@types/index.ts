@@ -6,10 +6,18 @@ export type AuthParamList = {
   Register: undefined;
 };
 
-export type DrawerParamList = {
+export type LotteryParamList = {
   LotteryList: undefined;
   LotteryBet: undefined;
   LotteryCart: undefined;
-  User: undefined;
+};
+
+export type UserParamList = {
+  UserProfile: undefined;
   UserEdit: undefined;
+};
+
+export type DrawerParamList = {
+  Lottery: undefined;
+  User: undefined;
 };
