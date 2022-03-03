@@ -14,7 +14,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { InputController, LoadingInfo } from "@components/index";
 
-import { emailValidation, toastShowSuccess } from "@helpers/index";
+import { emailValidation, toastShowSuccess } from "@shared/helpers/index";
 
 import { InputContainer } from "@screens/Auth/styles";
 

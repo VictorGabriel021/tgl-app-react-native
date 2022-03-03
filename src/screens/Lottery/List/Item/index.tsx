@@ -9,7 +9,7 @@ import {
 
 import { IBetListResponse } from "@shared/interfaces";
 
-import { dateBrazil } from "@helpers/date";
+import { dateBrazil, convertPriceForReal } from "@shared/helpers/index";
 
 type Props = {
   bet: IBetListResponse;
@@ -24,7 +24,7 @@ const LotteryListItem = ({ bet, color }: Props) => {
         <ListItemText>{bet.choosen_numbers}</ListItemText>
         <ListItemContainer>
           <ListItemPrice>{dateBrazil(bet.created_at)} -</ListItemPrice>
-          <ListItemPrice>R$ {bet.price.toFixed(2)}</ListItemPrice>
+          <ListItemPrice>{convertPriceForReal(bet.price)}</ListItemPrice>
         </ListItemContainer>
         <ListItemText color={color}>{bet.type.type}</ListItemText>
       </ListInfo>

@@ -7,7 +7,7 @@ import { RootState } from "@store/store";
 
 import { LotteryBetNumberContent, LotteryBetNumber } from "./styles";
 
-import { toastShowWarning } from "@helpers/toastInfo";
+import { toastShowWarning } from "@shared/helpers/toastInfo";
 
 type Props = {
   maxNumber: number;

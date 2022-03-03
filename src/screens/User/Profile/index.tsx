@@ -11,7 +11,7 @@ import { useSelector } from "react-redux";
 
 import { RootState } from "@store/store";
 
-import { dateBrazil } from "@helpers/date";
+import { dateBrazil } from "@shared/helpers/date";
 
 import { user } from "@shared/services";
 

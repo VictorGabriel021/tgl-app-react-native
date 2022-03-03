@@ -6,7 +6,7 @@ import { useDispatch } from "react-redux";
 
 import { LoadingContainer } from "./styles";
 
-import { getUserData, isAuthenticated } from "@helpers/auth";
+import { getUserData, isAuthenticated } from "@shared/helpers/auth";
 
 import { login, setDidTryAutoLogin } from "@store/authSlice";
 

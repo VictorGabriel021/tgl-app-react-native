@@ -12,7 +12,7 @@ import {
 
 import { AntDesign } from "@expo/vector-icons";
 
-import { toastShowWarning, toastShowSuccess, isEqualBet } from "@helpers/index";
+import { toastShowWarning, toastShowSuccess, isEqualBet } from "@shared/helpers/index";
 
 import { RootState } from "@store/store";
 import { addToCart } from "@store/cartSlice";

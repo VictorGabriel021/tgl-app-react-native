@@ -14,7 +14,7 @@ import {
   emailValidation,
   toastShowError,
   toastShowSuccess,
-} from "@helpers/index";
+} from "@shared/helpers/index";
 
 import {
   AuthCard,

@@ -12,7 +12,7 @@ import { StackNavigationProp } from "@react-navigation/stack";
 
 import { AuthParamList } from "@navigation/@types";
 
-import { toastShowError, toastShowSuccess } from "@helpers/toastInfo";
+import { toastShowError, toastShowSuccess } from "@shared/helpers/toastInfo";
 
 import {
   AuthCard,

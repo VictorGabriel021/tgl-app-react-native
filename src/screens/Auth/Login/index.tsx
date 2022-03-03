@@ -17,7 +17,7 @@ import {
   LoadingInfo,
 } from "@components/index";
 
-import { emailValidation, toastShowError } from "@helpers/index";
+import { emailValidation, toastShowError } from "@shared/helpers/index";
 
 import { login } from "@store/authSlice";
 

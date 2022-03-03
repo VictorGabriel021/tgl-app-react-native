@@ -6,6 +6,8 @@ import {
   toastShowError,
   toastShowWarning,
 } from "./toastInfo";
+import { convertPriceForReal } from "./convertMoney";
+import { dateBrazil } from "./date";
 
 export {
   getUserData,
@@ -15,4 +17,6 @@ export {
   toastShowError,
   toastShowWarning,
   isEqualBet,
+  convertPriceForReal,
+  dateBrazil,
 };

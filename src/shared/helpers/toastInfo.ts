@@ -14,7 +14,7 @@ export const toastShowError = (message: string) => {
     position: Toast.position.BOTTOM,
     containerStyle: { backgroundColor: "red" },
     textStyle: { color: "white", fontSize: 16 },
-    imgSource: require("../assets/images/error-icon.png"),
+    imgSource: require("../../assets/images/error-icon.png"),
     imgStyle: { tintColor: "white", height: 35, width: 35 },
   });
 };
@@ -24,7 +24,7 @@ export const toastShowWarning = (message: string) => {
     position: Toast.position.TOP,
     containerStyle: { backgroundColor: "#f7c200" },
     textStyle: { color: "white", fontSize: 16 },
-    imgSource: require("../assets/images/warning-icon.png"),
+    imgSource: require("../../assets/images/warning-icon.png"),
     imgStyle: { tintColor: "white", height: 35, width: 35 },
   });
 };

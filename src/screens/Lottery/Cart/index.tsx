@@ -24,7 +24,11 @@ import { AntDesign, Ionicons } from "@expo/vector-icons";
 
 import { Colors } from "@constants/index";
 
-import { toastShowSuccess, toastShowWarning } from "@helpers/toastInfo";
+import {
+  toastShowSuccess,
+  toastShowWarning,
+  convertPriceForReal,
+} from "@shared/helpers/index";
 
 import { bets } from "@shared/services";
 
@@ -69,7 +73,7 @@ const LotteryCartScreen = () => {
   const saveCartHandler = async () => {
     if (totalCart < min_cart_value) {
       toastShowWarning(
-        `O valor mínimo para apostar é R$ ${min_cart_value.toFixed(2)}!`
+        `O valor mínimo para apostar é ${convertPriceForReal(min_cart_value)}!`
       );
       return;
     }
@@ -124,7 +128,7 @@ const LotteryCartScreen = () => {
                         {bet.gameType.type}
                       </ListItemText>
                       <ListItemPrice>
-                        R$ {bet.gameType.price.toFixed(2)}
+                        {convertPriceForReal(bet.gameType.price)}
                       </ListItemPrice>
                     </ListItemContainer>
                   </ListInfo>
@@ -134,7 +138,7 @@ const LotteryCartScreen = () => {
 
           <TotalCartContainer>
             <CartTitle>CART</CartTitle>
-            <TotalCart>TOTAL: R$ {totalCart.toFixed(2)} </TotalCart>
+            <TotalCart>TOTAL: {convertPriceForReal(totalCart)} </TotalCart>
           </TotalCartContainer>
         </CardContent>
 

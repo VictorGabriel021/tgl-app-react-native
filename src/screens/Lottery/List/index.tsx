@@ -48,7 +48,6 @@ const LotteryListScreen = () => {
 
   const selectFilterHandler = (game: IGame) => {
     let types: string[];
-
     if (gameSelectedList.includes(game.type)) {
       setGameSelectedList((prev) => {
         types = prev.filter((item) => item !== game.type);
@@ -86,7 +85,7 @@ const LotteryListScreen = () => {
   }
 
   if (!gamesList) {
-    return <ErrorMessage message="Error loading betting filter information" />;
+    return <ErrorMessage message="Erro ao carregar as informações" />;
   }
 
   let header = (
@@ -121,18 +120,9 @@ const LotteryListScreen = () => {
     />
   );
 
-  if (isLoadingBetList) {
-    content = (
-      <>
-        {header}
-        <LoadingInfo size="large" />
-      </>
-    );
-  }
-
   if (
-    (betList.length === 0 && gameSelectedList.length === 0) ||
-    gameSelectedList.length > 1
+    betList.length === 0 &&
+    (gameSelectedList.length === 0 || gameSelectedList.length > 1)
   ) {
     content = (
       <>
@@ -147,6 +137,15 @@ const LotteryListScreen = () => {
       <>
         {header}
         <ErrorMessage message="Não existem apostas registradas para esse jogo!" />
+      </>
+    );
+  }
+
+  if (isLoadingBetList) {
+    content = (
+      <>
+        {header}
+        <LoadingInfo size="large" />
       </>
     );
   }

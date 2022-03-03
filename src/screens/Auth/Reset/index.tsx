@@ -7,7 +7,7 @@ import { useNavigation } from "@react-navigation/native";
 
 import { InputContainer } from "../styles";
 
-import { emailValidation, toastShowError } from "@helpers/index";
+import { emailValidation, toastShowError } from "@shared/helpers/index";
 
 import {
   AuthCard,

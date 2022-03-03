@@ -31,6 +31,8 @@ import { saveFilterInfo } from "@store/filterSlice";
 
 import { useDispatch } from "react-redux";
 
+import { convertPriceForReal } from "@shared/helpers/convertMoney";
+
 const LotteryBetScreen = () => {
   const [gamesList, setGamesList] = useState<IGamesResponse>();
   const [gameSelected, setGameSelected] = useState<IGame>();
@@ -90,7 +92,7 @@ const LotteryBetScreen = () => {
             <View style={{ marginVertical: 10 }}>
               <LotteryBetText>Game Price</LotteryBetText>
               <LotteryBetDescription>
-                R$ {gameSelected.price.toFixed(2)}
+                {convertPriceForReal(gameSelected.price)}
               </LotteryBetDescription>
             </View>
 
